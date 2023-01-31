@@ -58,7 +58,7 @@ const Register = (props) => {
                   required
                   fullWidth
                   id="email"
-                  label="email"
+                  label="Email"
                   autoFocus
                 />
               </Grid>
