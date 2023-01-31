@@ -1,25 +1,29 @@
 import React, { useState } from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import HomePage from './veiws/HomePage'
 import { Routes, Route } from 'react-router-dom'
+import HomePage from './veiws/HomePage'
+import Register from './veiws/Register';
+import Login from './veiws/Login';
 
 
 
 function App() {
   const [theme, setTheme] = useState('dark')
 
-  const darkTheme = createTheme({
+  const currTheme = createTheme({
     palette: {
       mode: theme,
     },
   });
   return (
     <div className='container'>
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={currTheme}>
         <CssBaseline />
         <Routes>
-          <Route element={<HomePage theme={theme} setTheme={setTheme}/>} path="/" />
+          <Route element={<HomePage theme={theme} setTheme={setTheme} />} path="/" />
+          <Route element={<Register theme={theme} setTheme={setTheme} />} path="/register" />
+          <Route element={<Login theme={theme} setTheme={setTheme} />} path="/login" />
         </Routes>
       </ThemeProvider>
     </div>

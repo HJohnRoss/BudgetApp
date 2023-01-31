@@ -41,7 +41,7 @@ const NavBar = (props) => {
     >
       <List>
         {['Features', 'About', 'Contact', 'Login', 'Register'].map((text, index) => (
-          <Link to={`/${text.toLowerCase()}`} key={text} className="text-decoration-none" style={props.theme === 'dark' ? { color: "rgb(233,233,233)" } : {color: "rgb(39,39,39)"}}>
+          <Link to={`/${text.toLowerCase()}`} key={text} className="text-decoration-none" style={props.theme === 'dark' ? { color: "rgb(233,233,233)" } : { color: "rgb(39,39,39)" }}>
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
