@@ -22,22 +22,18 @@ module.exports.register = async (req, res) => {
     phone: req.body.phone,
     password: req.body.password
   })
-  // if we made it this far, the password was correct
-  const userToken = jwt.sign({
-    id: req.body._id
-  }, process.env.SECRET_KEY);
-
-  console.log(userToken)
-
-  // note that the response object allows chained calls to cookie and json
-  // res
-  //   .cookie("usertoken", userToken)
-  res.cookie({ "Cookie ": ["auth", userToken, { httpOnly: true, secure: false }] })
-
-  console.log('Cookies: ', req.cookies)
-  console.log('Signed Cookies: ', req.signedCookies)
-
-  res.json({ msg: "success!" });
+    .then(user => {
+      res
+        .cookie(
+          "usertoken",
+          jwt.sign({ id: user._id }, process.env.SECRET_KEY),
+          {
+            httpOnly: true,
+          }
+        )
+        .json({ msg: "success!", user: user.email });
+        console.log("success")
+    })
 }
 
 // module.exports.register = (req, res) => {

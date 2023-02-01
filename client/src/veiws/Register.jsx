@@ -43,9 +43,9 @@ const Register = (props) => {
       phone,
       password,
       comfirmedPassword
-    })
+    }, { withCredentials: true })
       .then(res => {
-        // navigate('/dashboard')
+        navigate('/dashboard')
       })
       .catch(err => {
         console.log(err)

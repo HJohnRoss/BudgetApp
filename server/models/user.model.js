@@ -30,6 +30,10 @@ const UserSchema = new mongoose.Schema({
     }
   }, { timestamps: true });
   
+  UserSchema.virtual('confirmPassword')
+    .get(() => this._confirmPassword)
+    .set(value => this._confirmPassword = value);
+  
   UserSchema.pre('save', function (next) {
     bcrypt.hash(this.password, 10)
       .then(hash => {
@@ -39,8 +43,5 @@ const UserSchema = new mongoose.Schema({
   });
 
 
-UserSchema.virtual('confirmPassword')
-  .get(() => this._confirmPassword)
-  .set(value => this._confirmPassword = value);
 
 module.exports.User = mongoose.model('User', UserSchema)
