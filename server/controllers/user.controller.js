@@ -1,37 +1,52 @@
 const { User } = require('../models/user.model')
-const secret = process.env.SECRET_KEY;
 const jwt = require("jsonwebtoken");
 
 
 module.exports.register = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  
+
   if (user !== null) {
     // email not found in users collection
     console.log(req.body.email)
     return res.status(400).json("email is already taken");
   }
-  
+
   if (req.body.comfirmedPassword !== req.body.password) {
     // password wasn't a match!
     console.log('password')
     return res.status(400).json("passwords do not match");
   }
-  
+
   User.create({
     email: req.body.email,
     phone: req.body.phone,
     password: req.body.password
   })
+  // if we made it this far, the password was correct
   const userToken = jwt.sign({
     id: req.body._id
-  }, secret);
-  res
-  .cookie("usertoken", userToken, secret, {
-      httpOnly: true
-  })
-  .json({ msg: "success!" });
+  }, process.env.SECRET_KEY);
+
+  console.log(userToken)
+
+  // note that the response object allows chained calls to cookie and json
+  // res
+  //   .cookie("usertoken", userToken)
+  res.cookie({ "Cookie ": ["auth", userToken, { httpOnly: true, secure: false }] })
+
+  console.log('Cookies: ', req.cookies)
+  console.log('Signed Cookies: ', req.signedCookies)
+
+  res.json({ msg: "success!" });
 }
+
+// module.exports.register = (req, res) => {
+//   // res.cookie('name', 'express').send('cookie set')
+//   cookie()"yummy_cookie=choco";
+//   cookie = "tasty_cookie=strawberry";
+//   console.log('Cookies: ', req.cookies)
+//   console.log('Signed Cookies: ', req.signedCookies)
+// }
 
 module.exports.login = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
@@ -53,14 +68,14 @@ module.exports.login = async (req, res) => {
   // if we made it this far, the password was correct
   const userToken = jwt.sign({
     id: user._id
-  }, secret);
+  }, process.env.SECRET_KEY);
 
   // note that the response object allows chained calls to cookie and json
   res
     .cookie("usertoken", userToken, secret, {
       httpOnly: true
     })
-    .json({ msg: "success!" });
+  res.json({ msg: "success!" });
 }
 
 module.exports.logout = (req, res) => {
@@ -71,5 +86,11 @@ module.exports.logout = (req, res) => {
 module.exports.oneUser = (req, res) => {
   User.findOne({ _id: req.params.id })
     .then(user => res.json(user))
+    .catch(err => res.json(err))
+}
+
+module.exports.allUsers = (req, res) => {
+  User.find({}, { withCredentials: true })
+    .then(users => res.json(users))
     .catch(err => res.json(err))
 }

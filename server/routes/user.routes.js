@@ -7,5 +7,5 @@ module.exports = function(app) {
   app.post("/api/login", UserController.login);
   app.post("/api/logout", UserController.logout)
   // this route now has to be authenticated
-  app.get("/api/user/:id", authenticate, UserController.oneUser);
+  app.get("/api/users", authenticate, UserController.allUsers);
 }

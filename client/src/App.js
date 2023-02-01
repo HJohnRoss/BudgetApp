@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom'
 import HomePage from './veiws/HomePage'
 import Register from './veiws/Register';
 import Login from './veiws/Login';
+import Dashboard from './veiws/Dashboard';
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route element={<HomePage theme={theme} setTheme={setTheme} />} path="/" />
           <Route element={<Register theme={theme} setTheme={setTheme} />} path="/register" />
           <Route element={<Login theme={theme} setTheme={setTheme} />} path="/login" />
+          <Route element={<Dashboard theme={theme} setTheme={setTheme} />} path="/dashboard" />
         </Routes>
       </ThemeProvider>
     </div>

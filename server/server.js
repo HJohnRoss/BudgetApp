@@ -1,6 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-require("jsonwebtoken");
 const app = express()
 const cookieParser = require('cookie-parser');
 
