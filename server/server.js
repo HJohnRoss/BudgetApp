@@ -12,6 +12,6 @@ require('dotenv').config();
 app.use(express.urlencoded({extended: true})) 
 require('./routes/user.routes.js')(app) 
 
-app.listen(8000, () => { 
-  console.log("Listening at Port 8000")
+app.listen(8001, () => { 
+  console.log("Listening at Port 8001")
 })
