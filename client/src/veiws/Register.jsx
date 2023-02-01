@@ -50,13 +50,13 @@ const Register = (props) => {
         navigate('/dashboard')
       })
       .catch(err => {
-        console.log(err)
+        console.log(err.response.data.errors)
         const errorResponse = err.response.data.errors
         const errArr = []
         for (const key of Object.keys(errorResponse)) {
           errArr.push(errorResponse[key].message)
         }
-        setErrors(errArr)
+        setErrors(err.response.data.errors.hasOwnProperty("email") ? [err.response.data.errors["email"]] : errArr)
       })
   }
 

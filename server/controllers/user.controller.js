@@ -1,5 +1,5 @@
 const { User } = require('../models/user.model')
-const jwt = require("jsonwebtoken");
+const  jwt = require("jsonwebtoken");
 
 
 module.exports.register = async (req, res) => {
@@ -7,7 +7,9 @@ module.exports.register = async (req, res) => {
 
   if (user !== null) {
     console.log("email was already taken")
-    return
+    return res.status(400).json({
+        errors: {"email":"Email was already taken"}
+    })
   }
 
   User.create(req.body)
@@ -67,15 +69,15 @@ module.exports.oneUser = (req, res) => {
 }
 
 module.exports.allUsers = (req, res) => {
-  User.find({}, { withCredentials: true })
+  User.find({})
     .then(users => res.json(users))
     .catch(err => res.json(err))
 }
 
-module.exports.getLoggedInUser = (req, res) => {
-  const decodedJWT = jwt.decode(req.cookies.usertoken, { complete: true });
+// module.exports.getLoggedInUser = (req, res) => {
+//   const decodedJWT = jwt.decode(req.cookies.usertoken, { complete: true });
 
-  User.findById(decodedJWT.payload._id)
-      .then((user) => res.json(user))
-      .catch((err) => res.json(err));
-}
+//   User.findById(decodedJWT.payload._id)
+//     .then((user) => res.json(user))
+//     .catch((err) => res.json(err));
+// }
