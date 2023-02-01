@@ -1,5 +1,6 @@
 const { User } = require('../models/user.model')
-const  jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
 
 
 module.exports.register = async (req, res) => {
@@ -8,7 +9,7 @@ module.exports.register = async (req, res) => {
   if (user !== null) {
     console.log("email was already taken")
     return res.status(400).json({
-        errors: {"email":"Email was already taken"}
+      errors: { "email": "Email was already taken" }
     })
   }
 
@@ -32,7 +33,10 @@ module.exports.login = async (req, res) => {
 
   if (user === null) {
     // email not found in users collection
-    return res.sendStatus(400);
+    console.log("email was already taken")
+    return res.status(400).json({
+      errors: { email: "Invalid email" }
+    })
   }
 
   // if we made it this far, we found a user with this email address
@@ -41,19 +45,22 @@ module.exports.login = async (req, res) => {
 
   if (!correctPassword) {
     // password wasn't a match!
-    return res.sendStatus(400);
+    return res.sendStatus(400).json({
+      errors: { password: "Invalid password" }
+    });
   }
 
   // if we made it this far, the password was correct
-  const userToken = jwt.sign({
-    id: user._id
-  }, process.env.SECRET_KEY);
+
 
   // note that the response object allows chained calls to cookie and json
   res
-    .cookie("usertoken", userToken, secret, {
-      httpOnly: true
-    })
+    .cookie(
+      "usertoken", 
+      jwt.sign({ id: user._id }, process.env.SECRET_KEY),
+      {
+        httpOnly: true
+      })
   res.json({ msg: "success!" });
 }
 

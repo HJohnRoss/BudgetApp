@@ -15,9 +15,9 @@ import NavBar from '../components/NavBar';
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography variant="body2" color="text.secondary" align="center" {...props.sx}>
       {'Copyright © '}
-      <Link style={{ color: "rgb(180,180,173)", textDecoration: "none" }} to="/">
+      <Link style={props.theme === "light" ? { color:"rgba(0, 0, 0, 0.6)", textDecoration:"none" } : { color: "rgb(180,180,173)", textDecoration: "none" }} to="/">
         Budget App
       </Link>{' '}
       {new Date().getFullYear()}
@@ -99,7 +99,6 @@ const Register = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
                   fullWidth
                   id="phoneNumber"
                   label="Phone Number"
@@ -149,7 +148,7 @@ const Register = (props) => {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        <Copyright sx={{ mt: 5 }} theme={props.theme}/>
       </Container>
     </>
   )
