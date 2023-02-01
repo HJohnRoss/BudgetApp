@@ -20,11 +20,11 @@ const Dashboard = (props) => {
   return (
     <>
       <NavBar theme={props.theme} setTheme={props.setTheme} />
-      <p>{user ? 
-      <>
-      <p>{user.email}</p>
-        <p>{user.phone}</p>
-      </> : ""}</p>
+      {user ?
+        <>
+          <p>{user.email}</p>
+          <p>{user.phone}</p>
+        </> : ""}
     </>
   )
 }
