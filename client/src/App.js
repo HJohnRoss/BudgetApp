@@ -12,6 +12,8 @@ import Dashboard from './veiws/Dashboard';
 function App() {
   const [theme, setTheme] = useState('dark')
 
+  const [logged, setLogged] = useState(null)
+
   const currTheme = createTheme({
     palette: {
       mode: theme,
@@ -22,10 +24,47 @@ function App() {
       <ThemeProvider theme={currTheme}>
         <CssBaseline />
         <Routes>
-          <Route element={<HomePage theme={theme} setTheme={setTheme} />} path="/" />
-          <Route element={<Register theme={theme} setTheme={setTheme} />} path="/register" />
-          <Route element={<Login theme={theme} setTheme={setTheme} />} path="/login" />
-          <Route element={<Dashboard theme={theme} setTheme={setTheme} />} path="/dashboard" />
+          <Route
+            element={
+              <HomePage
+                theme={theme}
+                setTheme={setTheme}
+                logged={logged}
+              />}
+            path="/"
+          />
+
+          <Route element={
+            <Register
+              theme={theme}
+              setTheme={setTheme}
+              setLogged={setLogged}
+              logged={logged}
+            />}
+            path="/register"
+          />
+
+          <Route
+            element={
+              <Login
+                theme={theme}
+                setTheme={setTheme}
+                setLogged={setLogged}
+              />}
+            path="/login"
+          />
+
+          <Route
+            element={
+              <Dashboard
+                theme={theme}
+                setTheme={setTheme}
+                logged={logged}
+                setLogged={setLogged}
+              />}
+            path="/dashboard"
+          />
+
         </Routes>
       </ThemeProvider>
     </div>

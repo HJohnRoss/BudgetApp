@@ -6,22 +6,11 @@ module.exports.register = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (user !== null) {
-    // email not found in users collection
-    console.log(req.body.email)
-    return res.status(400).json("email is already taken");
+    console.log("email was already taken")
+    return
   }
 
-  if (req.body.comfirmedPassword !== req.body.password) {
-    // password wasn't a match!
-    console.log('password')
-    return res.status(400).json("passwords do not match");
-  }
-
-  User.create({
-    email: req.body.email,
-    phone: req.body.phone,
-    password: req.body.password
-  })
+  User.create(req.body)
     .then(user => {
       res
         .cookie(
@@ -32,17 +21,9 @@ module.exports.register = async (req, res) => {
           }
         )
         .json({ msg: "success!", user: user.email });
-        console.log("success")
     })
+    .catch(err => res.status(400).json(err))
 }
-
-// module.exports.register = (req, res) => {
-//   // res.cookie('name', 'express').send('cookie set')
-//   cookie()"yummy_cookie=choco";
-//   cookie = "tasty_cookie=strawberry";
-//   console.log('Cookies: ', req.cookies)
-//   console.log('Signed Cookies: ', req.signedCookies)
-// }
 
 module.exports.login = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
@@ -89,4 +70,12 @@ module.exports.allUsers = (req, res) => {
   User.find({}, { withCredentials: true })
     .then(users => res.json(users))
     .catch(err => res.json(err))
+}
+
+module.exports.getLoggedInUser = (req, res) => {
+  const decodedJWT = jwt.decode(req.cookies.usertoken, { complete: true });
+
+  User.findById(decodedJWT.payload._id)
+      .then((user) => res.json(user))
+      .catch((err) => res.json(err));
 }

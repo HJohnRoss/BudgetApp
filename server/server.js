@@ -1,15 +1,15 @@
+require('dotenv').config(); 
 const express = require('express')
+const cookieParser = require('cookie-parser'); 
 const cors = require('cors') 
 const app = express()  
-const cookieParser = require('cookie-parser'); 
 
 require('./config/mongoose.config')
 
 app.use(cookieParser()); 
 app.use(cors({ credentials: true, origin: "http://localhost:3000" })); 
 app.use(express.json()) 
-require('dotenv').config(); 
-app.use(express.urlencoded({extended: true})) 
+app.use(express.urlencoded({extended: false})) 
 require('./routes/user.routes.js')(app) 
 
 app.listen(8001, () => { 

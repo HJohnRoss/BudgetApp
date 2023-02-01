@@ -33,7 +33,7 @@ const Register = (props) => {
   const [email, setEmail] = useState()
   const [phone, setPhone] = useState()
   const [password, setPassword] = useState()
-  const [comfirmedPassword, setConfirmedPassword] = useState()
+  const [confirmPassword, setConfirmedPassword] = useState()
   const [errors, setErrors] = useState([])
 
   const handleSubmit = (e) => {
@@ -42,9 +42,11 @@ const Register = (props) => {
       email,
       phone,
       password,
-      comfirmedPassword
+      confirmPassword
     }, { withCredentials: true })
       .then(res => {
+        props.setLogged(res.data)
+        console.log(props.logged)
         navigate('/dashboard')
       })
       .catch(err => {
