@@ -14,26 +14,30 @@ const UserSchema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    validate: {
-      validator: val => /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/.test(val),
-      messgae: "Please enter a valid phone number"
+    // validate: {
+      //   validator: val => /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/.test(val),
+      //   messgae: "Please enter a valid phone number"
+      // }
+    },
+    password: {
+      type: String,
+      required: [true, "Password is required"],
+      minlength: [8, "Password must be 8 or more characters"]
+    },
+    pages: {
+      type: [Object],
+      default: []
     }
-  },
-  password: {
-    type: String,
-    required: [true, "Password is required"],
-    minlength: [8, "Password must be 8 or more characters"]
-  }
-}, { timestamps: true });
+  }, { timestamps: true });
+  
+  UserSchema.pre('save', function (next) {
+    bcrypt.hash(this.password, 10)
+      .then(hash => {
+        this.password = hash;
+        next();
+      });
+  });
 
-
-UserSchema.pre('save', function (next) {
-  bcrypt.hash(this.password, 10)
-    .then(hash => {
-      this.password = hash;
-      next();
-    });
-});
 
 UserSchema.virtual('confirmPassword')
   .get(() => this._confirmPassword)

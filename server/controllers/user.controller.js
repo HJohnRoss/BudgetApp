@@ -1,21 +1,36 @@
-const User = require('../models/user.model')
-const myFirstSecret = process.env.SECRET_KEY;
+const { User } = require('../models/user.model')
+const secret = process.env.SECRET_KEY;
+const jwt = require("jsonwebtoken");
 
 
-module.exports.register = (req, res) => {
-  User.create(req.body)
-    .then(user => {
-      const userToken = jwt.sign({
-        id: user._id
-      }, myFirstSecret);
-
-      res
-        .cookie("usertoken", userToken, secret, {
-          httpOnly: true
-        })
-        .json({ msg: "success!", user: user });
-    })
-    .catch(err => res.json(err));
+module.exports.register = async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  
+  if (user !== null) {
+    // email not found in users collection
+    console.log(req.body.email)
+    return res.status(400).json("email is already taken");
+  }
+  
+  if (req.body.comfirmedPassword !== req.body.password) {
+    // password wasn't a match!
+    console.log('password')
+    return res.status(400).json("passwords do not match");
+  }
+  
+  User.create({
+    email: req.body.email,
+    phone: req.body.phone,
+    password: req.body.password
+  })
+  const userToken = jwt.sign({
+    id: req.body._id
+  }, secret);
+  res
+  .cookie("usertoken", userToken, secret, {
+      httpOnly: true
+  })
+  .json({ msg: "success!" });
 }
 
 module.exports.login = async (req, res) => {
@@ -38,7 +53,7 @@ module.exports.login = async (req, res) => {
   // if we made it this far, the password was correct
   const userToken = jwt.sign({
     id: user._id
-  }, myFirstSecret);
+  }, secret);
 
   // note that the response object allows chained calls to cookie and json
   res
@@ -51,4 +66,10 @@ module.exports.login = async (req, res) => {
 module.exports.logout = (req, res) => {
   res.clearCookie('usertoken');
   res.sendStatus(200);
+}
+
+module.exports.oneUser = (req, res) => {
+  User.findOne({ _id: req.params.id })
+    .then(user => res.json(user))
+    .catch(err => res.json(err))
 }

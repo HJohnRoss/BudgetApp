@@ -1,17 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 import NavBar from '../components/NavBar';
 
@@ -28,7 +26,39 @@ function Copyright(props) {
   );
 }
 
+
 const Register = (props) => {
+  const navigate = useNavigate()
+
+  const [email, setEmail] = useState()
+  const [phone, setPhone] = useState()
+  const [password, setPassword] = useState()
+  const [comfirmedPassword, setConfirmedPassword] = useState()
+  const [errors, setErrors] = useState([])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    axios.post('http://localhost:8000/api/register', {
+      email,
+      phone,
+      password,
+      comfirmedPassword
+    })
+      .then(res => {
+        console.log(res)
+        navigate('/dashboard')
+      })
+      .catch(err => {
+        console.log(err)
+        const errorResponse = err.response.data.errors
+        const errArr = []
+        for (const key of Object.keys(errorResponse)) {
+          errArr.push(errorResponse[key].message)
+        }
+        setErrors(errArr)
+      })
+  }
+
   return (
     <>
       <NavBar theme={props.theme} setTheme={props.setTheme} />
@@ -49,7 +79,10 @@ const Register = (props) => {
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 3 }}> {/* handle submit here */}
+          {
+            errors.map((err, i) => <p key={i}>{err}</p>)
+          }
+          <Box component="form" noValidate sx={{ mt: 3 }} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -60,6 +93,7 @@ const Register = (props) => {
                   id="email"
                   label="Email"
                   autoFocus
+                  onChange={e => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -70,6 +104,7 @@ const Register = (props) => {
                   label="Phone Number"
                   name="phone"
                   autoComplete="phone-number"
+                  onChange={e => setPhone(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -81,6 +116,7 @@ const Register = (props) => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={e => setPassword(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -91,7 +127,7 @@ const Register = (props) => {
                   label="Confirm Password"
                   type="confirmPassword"
                   id="confirmPassword"
-                  autoComplete="none"
+                  onChange={e => setConfirmedPassword(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -106,8 +142,8 @@ const Register = (props) => {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link to="/login" variant="body2">
-                    Already have an account? Sign in
-                  </Link>
+                  Already have an account? Sign in
+                </Link>
               </Grid>
             </Grid>
           </Box>

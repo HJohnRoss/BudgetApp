@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 
 require('./config/mongoose.config')
 
-app.use(cors())
 app.use(cookieParser());
 app.use(cors({credentials: true, origin: 'http://localhost:3000'}));
 app.use(express.json())
