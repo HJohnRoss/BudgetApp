@@ -5,7 +5,7 @@ import NavBar from '../components/NavBar'
 const Dashboard = (props) => {
   const [user, setUser] = useState()
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/users`)
+    axios.get(`http://localhost:8001/api/users`)
     .then(res => console.log(res.data))
     .catch(err => console.log(err))
   }, [])
