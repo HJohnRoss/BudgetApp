@@ -41,9 +41,8 @@ const Login = (props) => {
       password,
     }, { withCredentials: true })
       .then(res => {
-        props.setLogged(res.data)
-        console.log(props.logged)
-        navigate('/dashboard')
+        props.setLogged(true)
+        navigate(`/dashboard/${res.data.id}`)
       })
       .catch(err => {
         setErrors(err.response.data.errors["error"])
@@ -69,10 +68,9 @@ const Login = (props) => {
           <Typography component="h1" variant="h5">
             Sign In
           </Typography>
-          {/* {
-            errors.map((err, i) => <p key={i}>{err}</p>)
-          } */}
-          {errors ? <p>{errors}</p> : ""}
+
+          {errors ? <p>{errors}</p> : ""} {/* showing erros */}
+
           <Box component="form" noValidate sx={{ mt: 3 }} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>

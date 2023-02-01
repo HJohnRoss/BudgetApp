@@ -20,7 +20,7 @@ function App() {
     },
   });
   return (
-    <div className='container'>
+    <div>
       <ThemeProvider theme={currTheme}>
         <CssBaseline />
         <Routes>
@@ -62,7 +62,7 @@ function App() {
                 logged={logged}
                 setLogged={setLogged}
               />}
-            path="/dashboard"
+            path="/dashboard/:id"
           />
 
         </Routes>

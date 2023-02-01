@@ -45,9 +45,8 @@ const Register = (props) => {
       confirmPassword
     }, { withCredentials: true })
       .then(res => {
-        props.setLogged(res.data)
-        console.log(props.logged)
-        navigate('/dashboard')
+        props.setLogged(true)
+        navigate(`/dashboard/${res.data.id}`)
       })
       .catch(err => {
         console.log(err.response.data.errors)

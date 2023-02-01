@@ -23,7 +23,7 @@ module.exports.register = async (req, res) => {
             httpOnly: true,
           }
         )
-        .json({ msg: "success!", user: user.email });
+        .json({ msg: "success!", id: user._id });
     })
     .catch(err => res.status(400).json(err))
 }
@@ -61,7 +61,7 @@ module.exports.login = async (req, res) => {
       {
         httpOnly: true
       })
-  res.json({ msg: "success!" });
+  res.json({ msg: "success!", id: user._id });
 }
 
 module.exports.logout = (req, res) => {
@@ -74,17 +74,3 @@ module.exports.oneUser = (req, res) => {
     .then(user => res.json(user))
     .catch(err => res.json(err))
 }
-
-module.exports.allUsers = (req, res) => {
-  User.find({})
-    .then(users => res.json(users))
-    .catch(err => res.json(err))
-}
-
-// module.exports.getLoggedInUser = (req, res) => {
-//   const decodedJWT = jwt.decode(req.cookies.usertoken, { complete: true });
-
-//   User.findById(decodedJWT.payload._id)
-//     .then((user) => res.json(user))
-//     .catch((err) => res.json(err));
-// }
