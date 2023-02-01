@@ -18,7 +18,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props.sx}>
       {'Copyright © '}
-      <Link style={props.theme === "light" ? { color:"rgb(0, 0, 0, 0.6)", textDecoration:"none" } : { color: "rgb(180,180,173)", textDecoration: "none" }} to="/">
+      <Link style={props.theme === "light" ? { color: "rgb(0, 0, 0, 0.6)", textDecoration: "none" } : { color: "rgb(180,180,173)", textDecoration: "none" }} to="/">
         Budget App
       </Link>{' '}
       {new Date().getFullYear()}
@@ -29,14 +29,14 @@ function Copyright(props) {
 const Login = (props) => {
   const navigate = useNavigate()
 
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState()
 
   const [email, setEmail] = useState()
-  const [password,setPassword] = useState()
+  const [password, setPassword] = useState()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-        axios.post('http://localhost:8001/api/login', {
+    axios.post('http://localhost:8001/api/login', {
       email,
       password,
     }, { withCredentials: true })
@@ -46,13 +46,7 @@ const Login = (props) => {
         navigate('/dashboard')
       })
       .catch(err => {
-        console.log(err.response.data.errors)
-        const errorResponse = err.response.data.errors
-        const errArr = []
-        for (const key of Object.keys(errorResponse)) {
-          errArr.push(errorResponse[key].message)
-        }
-        setErrors(err.response.data.errors.hasOwnProperty("email") ? [err.response.data.errors["email"]] : errArr)
+        setErrors(err.response.data.errors["error"])
       })
   }
 
@@ -75,9 +69,10 @@ const Login = (props) => {
           <Typography component="h1" variant="h5">
             Sign In
           </Typography>
-          {
+          {/* {
             errors.map((err, i) => <p key={i}>{err}</p>)
-          }
+          } */}
+          {errors ? <p>{errors}</p> : ""}
           <Box component="form" noValidate sx={{ mt: 3 }} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -122,7 +117,7 @@ const Login = (props) => {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} theme={props.theme}/>
+        <Copyright sx={{ mt: 5 }} theme={props.theme} />
       </Container>
     </>
   )

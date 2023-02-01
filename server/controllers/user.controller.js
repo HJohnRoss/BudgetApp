@@ -33,9 +33,8 @@ module.exports.login = async (req, res) => {
 
   if (user === null) {
     // email not found in users collection
-    console.log("email was already taken")
     return res.status(400).json({
-      errors: { email: "Invalid email" }
+      errors: { error: "Invalid email" }
     })
   }
 
@@ -45,8 +44,9 @@ module.exports.login = async (req, res) => {
 
   if (!correctPassword) {
     // password wasn't a match!
-    return res.sendStatus(400).json({
-      errors: { password: "Invalid password" }
+    console.log("invalid password")
+    return res.status(400).json({
+      errors: { error: "Invalid password" }
     });
   }
 
