@@ -74,3 +74,9 @@ module.exports.oneUser = (req, res) => {
     .then(user => res.json(user))
     .catch(err => res.json(err))
 }
+
+module.exports.update = (req, res) => {
+  User.findOneAndUpdate({_id: req.params.id}, req.body, { runValidators: true })
+    .then(update => res.json(update))
+    .catch(err => res.json(err))
+}
