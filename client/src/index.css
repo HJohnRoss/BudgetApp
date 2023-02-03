@@ -255,6 +255,10 @@ code {
   width: 100%;
 }
 
+#about_banner_2 img {
+  width: 100%;
+}
+
 #about h3 {
   margin-top: 80px;
 }

@@ -33,7 +33,7 @@ const About = (props) => {
         <img src={about_banner} alt={"about_banner"} />
       </div>
 
-      <div>
+      <div id="about_banner_2">
         <img src={about_banner_2} alt={"about_banner_2"} />
       </div>
 
