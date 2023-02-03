@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema({
   pages: {
     type: [Object],
     default: []
+  },
+  transactions: {
+    type: [Object],
+    default: []
   }
 }, { timestamps: true });
 

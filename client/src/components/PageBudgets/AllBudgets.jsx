@@ -7,7 +7,6 @@ const AllBudgets = (props) => {
 
   const handleClick = (i) => {
     if(props.budgetId === null || i != props.budgetId) {
-      console.log(i)
       props.setBudgetId(i)
     } else {
       props.setBudgetId(null)

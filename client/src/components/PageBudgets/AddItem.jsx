@@ -20,12 +20,19 @@ const AddItem = (props) => {
   const onSubmit = (e) => {
     e.preventDefault()
     const newPages = props.user.pages
+    const transaction = props.user.transactions
     newPages[props.index].categories[props.budgetId].items.push({
       expense: expense,
       amount: amnt
     })
+    transaction.push({
+      expense: expense,
+      amount: amnt,
+      category: newPages[props.index].categories[props.budgetId].name
+    })
     newPages[props.index].categories[props.budgetId].itemTotal += parseFloat(amnt)
     axios.put(`http://localhost:8001/api/user/${id}`, {
+      transactions: transaction,
       pages: newPages
     }
       , { withCredentials: true })
@@ -38,7 +45,7 @@ const AddItem = (props) => {
   }
   return (
     <>
-      <div style={{backgroundColor:"gray"}}>
+      <div style={{ backgroundColor: "gray" }}>
         <button onClick={() => props.setBudgetId(null)}>exit</button>
         <Box component="form"
           sx={{

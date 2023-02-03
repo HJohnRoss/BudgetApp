@@ -45,6 +45,8 @@ const EditPages = (props) => {
           value={props.index}
           label="Change Page"
           onChange={e => {
+            props.setBudgetId(null)
+            props.setShowTransactions(false)
             props.setMonth(props.user.pages[e.target.value].month)
             props.setYear(props.user.pages[e.target.value].year)
             props.setBudget(props.user.pages[e.target.value].budget)

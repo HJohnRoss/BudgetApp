@@ -12,6 +12,7 @@ import ShowBudget from '../components/ShowBudget';
 import CreateBudget from '../components/PageBudgets/CreateBudget';
 import AllBudgets from '../components/PageBudgets/AllBudgets';
 import AddItem from '../components/PageBudgets/AddItem';
+import RecentTransactions from '../components/Transactions/RecentTransactions'
 
 const Dashboard = (props) => {
 
@@ -25,6 +26,7 @@ const Dashboard = (props) => {
   const [budget, setBudget] = useState("")
 
   const [budgetId, setBudgetId] = useState(null)
+  const [showTransactions, setShowTransactions] = useState(false)
 
   useEffect(() => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
@@ -32,7 +34,7 @@ const Dashboard = (props) => {
         setUser(res.data)
         console.log(res.data)
         props.setLogged(true)
-        if(res.data.pages[0]){
+        if (res.data.pages[0]) {
           setBudget(res.data.pages[0].budget)
         } else {
           setBudget(0)
@@ -91,6 +93,8 @@ const Dashboard = (props) => {
                     setMonth={setMonth}
                     updateUser={updateUser}
                     setBudget={setBudget}
+                    setBudgetId={setBudgetId}
+                    setShowTransactions={setShowTransactions}
                   // function ^
                   />
                   <hr />
@@ -129,13 +133,35 @@ const Dashboard = (props) => {
 
                     {
                       budgetId !== null ?
-                    <AddItem
-                      user={user}
-                      index={index}
-                      budgetId={budgetId}
-                      setBudgetId={setBudgetId}
-                      updateUser={updateUser}
-                    /> : ""
+                        <>
+                          <AddItem
+                            user={user}
+                            index={index}
+                            budgetId={budgetId}
+                            setBudgetId={setBudgetId}
+                            updateUser={updateUser}
+                          />
+                          <hr />
+                        </>
+                        : ""
+                    }
+                  </div>
+
+                  <div>
+                    {
+                      user.transactions.length > 0 ?
+                        <>
+                          <h1>Recent Transactions</h1>
+                          <RecentTransactions
+                            user={user}
+                            index={index}
+                            showTransactions={showTransactions}
+                            setShowTransactions={setShowTransactions}
+                          />
+                        </> :
+                        <div>
+                          <h2>No Recent Transactions</h2>
+                        </div>
                     }
                   </div>
                 </>
