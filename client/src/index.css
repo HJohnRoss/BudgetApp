@@ -81,6 +81,171 @@ code {
   opacity: 0;
 }
 
+
+/* === EVERYTHING ABOUT FEATURES */
+
+/* FEAT 1 */
+#header-open {
+  background-color: white;
+  color: black;
+}
+
+#header-text {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  min-width: 30%;
+  min-height: 30%;
+}
+
+#header-open {
+  margin-bottom: 50px;
+}
+
+#header-open img {
+  width: 40%;
+  height: 40%;
+  margin-top: 50px;
+}
+
+/* FEAT 2 */
+#header-2 {
+  margin-bottom: 50px;
+  margin-top: 50px;
+  border-bottom: 2px solid #E3EBF0;
+  gap: 8%;
+}
+
+#header-2 img {
+  width: 20%;
+  height: 20%;
+  margin-bottom: 50px;
+  min-width: 30%;
+  min-height: 30%;
+}
+
+/* FEAT 3 */
+#header-3 {
+  margin-bottom: 50px;
+  margin-top: 50px;
+  border-bottom: 2px solid #E3EBF0;
+  gap: 8%;
+}
+
+#header-3 img {
+  width: 20%;
+  height: 20%;
+  margin-bottom: 50px;
+  min-width: 30%;
+  min-height: 30%;
+}
+
+/* FEAT 4 */
+#header-4 {
+  margin-bottom: 50px;
+  margin-top: 50px;
+  border-bottom: 2px solid #E3EBF0;
+  gap: 8%;
+}
+
+#header-4 img {
+  width: 20%;
+  height: 20%;
+  margin-bottom: 50px;
+  min-width: 30%;
+  min-height: 30%;
+}
+
+/* FEATS TEXT */
+#feats-text {
+  font-size: auto;
+  width: 80%;
+  min-width: 30%;
+  min-height: 30%;
+}
+
+#feats-text h3 {
+  font-size: 40pt;
+}
+
+#feats-text p {
+  font-size: 15pt;
+}
+
+/* FEATS OUT */
+#feats-out {
+  padding-bottom: 5%;
+}
+
+#feats-out-text {
+  margin-top: 5%;
+  min-width: 30%;
+  min-height: 30%;
+}
+
+
+/* SIGN UP FOR BUDGETGUARD BUTTON */
+.button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #ffffff;
+  border: 1px solid #4f4f4f;
+  border-radius: 12px;
+  transition: all 0.2s ease-in;
+  position: relative;
+  overflow: hidden;
+  font-size: 19px;
+  color: black;
+  z-index: 1;
+}
+
+.button:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.25);
+  top: 100%;
+  width: 140%;
+  height: 180%;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  display: block;
+  transition: all 0.4s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button:after {
+  content: "";
+  position: absolute;
+  left: 55%;
+  transform: translateX(-50%) scaleY(1) scaleX(1.45);
+  top: 180%;
+  width: 160%;
+  height: 190%;
+  background-color: #39bda7;
+  border-radius: 50%;
+  display: block;
+  transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+  z-index: -1;
+}
+
+.button:hover {
+  color: #ffffff;
+  border: 1px solid #39bda7;
+}
+
+.button:hover:before {
+  top: -35%;
+  background-color: #39bda7;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+.button:hover:after {
+  top: -45%;
+  background-color: #39bda7;
+  transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+
 /* === EVERYTHING ABOUT US === */
 #about_banner img {
   width: 100%;
