@@ -40,7 +40,7 @@ const HomePage = (props) => {
         <div id="second-banner-img" className="d-flex justify-content-between gap-5 mt-5">
           <img src={cardleft} alt={"cardleft"} className="img-fluid mb-5" />
           <div>
-          <button class="btn">Get Started Now</button>
+          <button class="btn">Get Started</button>
           </div>
           <img src={cardright} alt={"cardright"} className="img-fluid" />
         </div>
