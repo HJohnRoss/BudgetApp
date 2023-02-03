@@ -32,7 +32,7 @@ const HomePage = (props) => {
       <img src={main_banner} alt={"main_banner"} className="img-fluid" />
 
       {/* Second Banner Promotion */}
-      <div id="second-banner" className="mt-5">
+      <div id="second-banner" className="mt-4">
         <div className="text-center">
           <h2>Introducing Joint Budgetting Plans</h2>
           <p>Get in sync with your partner.</p>
@@ -96,13 +96,13 @@ const HomePage = (props) => {
       {/* Interval Timed Carousel */}
       <div id="carouselExampleInterval" className="carousel slide mt-5 mb-4" data-bs-ride="carousel">
         <div className="carousel-inner">
-          <div className="carousel-item active" data-bs-interval="2000">
+          <div className="carousel-item active" data-bs-interval="3000">
             <img src={car1} className="d-block w-100" alt={car1} />
           </div>
-          <div className="carousel-item" data-bs-interval="2000">
+          <div className="carousel-item" data-bs-interval="3000">
             <img src={car2} className="d-block w-100" alt={car2} />
           </div>
-          <div className="carousel-item" data-bs-interval="2000">
+          <div className="carousel-item" data-bs-interval="3000">
             <img src={car3} className="d-block w-100" alt={car3} />
           </div>
         </div>
