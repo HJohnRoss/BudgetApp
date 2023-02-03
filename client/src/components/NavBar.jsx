@@ -8,9 +8,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings';
 import InfoIcon from '@mui/icons-material/Info';
-import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
@@ -40,14 +39,14 @@ const NavBar = (props) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Features', 'About', 'Contact', 'Login', 'Register'].map((text, index) => (
+        {['Home', 'Features', 'About', 'Login', 'Register'].map((text, index) => (
           <Link to={`/${text.toLowerCase()}`} key={text} className="text-decoration-none" style={props.theme === 'dark' ? { color: "rgb(233,233,233)" } : { color: "rgb(39,39,39)" }}>
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index === 0 ? <DisplaySettingsIcon /> : ""}
-                  {index === 1 ? <InfoIcon /> : ""}
-                  {index === 2 ? <ContactSupportIcon /> : ""}
+                  {index === 0 ? <HomeIcon /> : ""}
+                  {index === 1 ? <DisplaySettingsIcon /> : ""}
+                  {index === 2 ? <InfoIcon /> : ""}
                   {index === 3 ? <LoginIcon /> : ""}
                   {index === 4 ? <PersonAddAlt1Icon /> : ""}
                 </ListItemIcon>
