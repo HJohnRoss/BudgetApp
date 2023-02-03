@@ -31,9 +31,9 @@ const CreateBudget = (props) => {
     }
       , { withCredentials: true })
       .then(res => {
-        props.updateUser()
         setBudgetName(null)
         setBudgetAmount(null)
+        props.updateUser()
       })
       .catch(err => console.log(err))
   }
