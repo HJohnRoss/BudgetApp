@@ -24,7 +24,6 @@ const EditPages = (props) => {
     }
       , { withCredentials: true })
       .then(res => {
-        console.log(res.data)
         props.updateUser()
       })
       .catch(err => console.log(err))
@@ -42,7 +41,6 @@ const EditPages = (props) => {
       <FormControl className='me-2' sx={{ minWidth: 200 }}>
         <InputLabel variant="standard" htmlFor="uncontrolled-native">Change Budget Page</InputLabel>
         <NativeSelect
-          labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={props.index}
           label="Change Page"
@@ -65,7 +63,6 @@ const EditPages = (props) => {
             <FormControl className='me-2' sx={{ minWidth: 200 }}>
               <InputLabel variant="standard" htmlFor="uncontrolled-native">Month</InputLabel>
               <NativeSelect
-                labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 // defaultValue={props.month !== null ? props.month : props.user.pages[props.index].month}
                 label="Change Page"

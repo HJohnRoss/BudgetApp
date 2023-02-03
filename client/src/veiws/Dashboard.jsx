@@ -7,6 +7,8 @@ import NavBar from '../components/NavBar'
 import { useParams } from 'react-router-dom'
 
 import EditPages from '../components/EditPages';
+import EditBudget from '../components/EditBudget'
+import ShowBudget from '../components/ShowBudget';
 
 const Dashboard = (props) => {
 
@@ -17,6 +19,7 @@ const Dashboard = (props) => {
   const [index, setIndex] = useState(0)
   const [month, setMonth] = useState("January")
   const [year, setYear] = useState(2023)
+  const [budget, setBudget] = useState(null)
 
   useEffect(() => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
@@ -31,7 +34,6 @@ const Dashboard = (props) => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
       .then(res => {
         setUser(res.data)
-        console.log(res.data)
         props.setLogged(true)
       })
       .catch(err => console.log(err))
@@ -76,9 +78,28 @@ const Dashboard = (props) => {
                   month={month}
                   setMonth={setMonth}
                   updateUser={updateUser}
+                // function ^
                 />
                 : ""
             }
+            <div>
+              <ShowBudget
+                budget={budget}
+                index={index}
+                user={user}
+              />
+
+            <EditBudget
+              user={user}
+              budget={budget}
+              setBudget={setBudget}
+              index={index}
+              updateUser={updateUser}
+            // function ^
+            />
+
+            </div>
+
           </div> : ""
       }
     </>
