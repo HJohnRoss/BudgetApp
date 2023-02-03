@@ -30,9 +30,9 @@ const AddItem = (props) => {
     }
       , { withCredentials: true })
       .then(res => {
-        props.updateUser()
         setAmnt("")
         setExpense("")
+        props.updateUser()
       })
       .catch(err => console.log(err))
   }
@@ -53,6 +53,7 @@ const AddItem = (props) => {
             <Input
               id="standard-adornment-amount"
               onChange={e => setExpense(e.target.value)}
+              value={expense}
             />
           </FormControl>
           <FormControl sx={{ m: 1 }} variant="standard">
@@ -61,6 +62,7 @@ const AddItem = (props) => {
               id="standard-number"
               type="number"
               onChange={e => setAmnt(e.target.value)}
+              value={amnt}
               startAdornment={<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>}
             />
           </FormControl>
@@ -79,9 +81,9 @@ const AddItem = (props) => {
         {/* show all items */}
         {
           arr.map((item, i) =>
-            <div>
+            <div key={i}>
               <h5>{item.expense}</h5>
-              <h6>{item.amount}</h6>
+              <h6>${item.amount}</h6>
               <hr />
             </div>
           )
