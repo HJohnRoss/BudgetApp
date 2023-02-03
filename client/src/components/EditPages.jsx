@@ -47,8 +47,8 @@ const EditPages = (props) => {
           onChange={e => {
             props.setMonth(props.user.pages[e.target.value].month)
             props.setYear(props.user.pages[e.target.value].year)
+            props.setBudget(props.user.pages[e.target.value].budget)
             props.setIndex(e.target.value)
-            props.setBudget(null)
           }}
         >
           {
@@ -94,13 +94,16 @@ const EditPages = (props) => {
               value={props.year !== null ? props.year : props.user.pages[props.index].year}
               onChange={e => props.setYear(e.target.value)}
             />
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ mt: 1 }}
-            >
-              Update
-            </Button>
+            {
+              props.user.pages[props.index].year !== props.year || props.user.pages[props.index].month !== props.month ?
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{ mt: 1 }}
+                >
+                  Update
+                </Button> : ""
+            }
           </> : ""
       }
     </Box>

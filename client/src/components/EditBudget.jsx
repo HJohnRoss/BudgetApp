@@ -44,18 +44,21 @@ const EditBudget = (props) => {
           id="standard-number"
           type="number"
           startAdornment={<InputAdornment position="start"><AttachMoneyIcon/></InputAdornment>}
-          value={props.budget !== null ? props.budget : page.budget}
+          value={ props.budget}
           variant="standard"
           onChange={e => props.setBudget(e.target.value)}
         />
         </FormControl>
+        {
+        props.budget.length > 0 ?
         <Button
           type="submit"
           variant="contained"
           sx={{ mt: 2 }}
         >
           Set Budget
-        </Button>
+        </Button> : ""
+        }
       </Box>
     </>
   )

@@ -7,14 +7,35 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 const CreateBudget = (props) => {
-  const [budgetName, setBudgetName] = useState()
-  const [budgetAmount, setBudgetAmount] = useState()
+  const { id } = useParams()
+
+  const [budgetName, setBudgetName] = useState(null)
+  const [budgetAmount, setBudgetAmount] = useState(null)
 
   const onSubmit = (e) => {
     e.preventDefault()
+    let newPages = props.user.pages
+    newPages[props.index].categories.push({
+      name: budgetName,
+      amount: budgetAmount,
+      items: [],
+      itemTotal: 0
+    })
     console.log(budgetName, budgetAmount)
+    axios.put(`http://localhost:8001/api/user/${id}`, {
+      pages: newPages
+    }
+      , { withCredentials: true })
+      .then(res => {
+        props.updateUser()
+        setBudgetName(null)
+        setBudgetAmount(null)
+      })
+      .catch(err => console.log(err))
   }
   return (
     <>
@@ -42,13 +63,16 @@ const CreateBudget = (props) => {
             startAdornment={<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>}
           />
         </FormControl>
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ mt: 2 }}
-        >
-          Set Budget
-        </Button>
+        {
+          budgetName !== null && budgetAmount !== null ?
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ mt: 2 }}
+            >
+              Set Budget
+            </Button> : ""
+        }
       </Box>
     </>
   )
