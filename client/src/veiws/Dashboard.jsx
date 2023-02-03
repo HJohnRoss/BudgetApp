@@ -13,6 +13,7 @@ import CreateBudget from '../components/PageBudgets/CreateBudget';
 import AllBudgets from '../components/PageBudgets/AllBudgets';
 import AddItem from '../components/PageBudgets/AddItem';
 import RecentTransactions from '../components/Transactions/RecentTransactions'
+import AllTransactions from '../components/Transactions/AllTransactions'
 
 const Dashboard = (props) => {
 
@@ -155,13 +156,26 @@ const Dashboard = (props) => {
                           <RecentTransactions
                             user={user}
                             index={index}
-                            showTransactions={showTransactions}
-                            setShowTransactions={setShowTransactions}
                           />
+                          <button onClick={() => {
+                            if (!showTransactions) {
+                              setShowTransactions(true)
+
+                            } else {
+                              setShowTransactions(false)
+                            }
+                          }}>Show All Transactions</button>
                         </> :
                         <div>
                           <h2>No Recent Transactions</h2>
                         </div>
+                    }
+                    {
+                      showTransactions === true ?
+                        <AllTransactions
+                          user={user}
+                          index={index}
+                        /> : ""
                     }
                   </div>
                 </>
