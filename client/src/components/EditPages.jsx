@@ -37,6 +37,7 @@ const EditPages = (props) => {
       autoComplete="off"
       onSubmit={onSubmit}
     >
+      <h5>Config:</h5>
       <FormControl className='me-2' sx={{ minWidth: 200 }}>
         <InputLabel variant="standard" htmlFor="uncontrolled-native">Change Budget Page</InputLabel>
         <NativeSelect

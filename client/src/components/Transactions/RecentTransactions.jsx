@@ -16,7 +16,6 @@ const RecentTransactions = (props) => {
                         <p>Expense: {item.expense}</p>
                         <p>-${item.amount}</p>
                         <p>Category: {item.category}</p>
-                        <hr />
                       </div>
                       :
                       <>

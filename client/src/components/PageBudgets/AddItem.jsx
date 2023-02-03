@@ -45,8 +45,14 @@ const AddItem = (props) => {
   }
   return (
     <>
-      <div style={{ backgroundColor: "gray" }}>
-        <button onClick={() => props.setBudgetId(null)}>exit</button>
+      <div className="rounded mt-3" style={props.theme === "dark" ? { border: "2px solid #39bda7" } : {border: "2px solid rgb(58, 136, 195)"}}>
+        <Button
+          variant="contained"
+          sx={{ mt: 1, ml:1 }}
+          onClick={() => props.setBudgetId(null)}
+        >
+          exit
+        </Button>
         <Box component="form"
           sx={{
             '& .MuiTextField-root': { width: '25ch' },
@@ -88,7 +94,7 @@ const AddItem = (props) => {
         {/* show all items */}
         {
           arr.map((item, i) =>
-            <div key={i}>
+            <div key={i} className='ms-2'>
               <h5>{item.expense}</h5>
               <h6>${item.amount}</h6>
               <hr />

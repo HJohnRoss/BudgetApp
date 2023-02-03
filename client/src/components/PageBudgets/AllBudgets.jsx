@@ -1,6 +1,5 @@
 import React from 'react'
-import styles from './module.allbudgets.css'
-import Container from '@mui/material/Container';
+import './module.allbudgets.css'
 
 const AllBudgets = (props) => {
   const arr = props.user.pages[props.index].categories
@@ -14,7 +13,7 @@ const AllBudgets = (props) => {
   }
   return (
     <>
-      <h1>Fast Approaching Budgets</h1>
+      <h1 className='text-center'>Fast Approaching Budgets</h1>
       {
         arr.map((oneBudget, i) =>
           <button onClick={() => handleClick(i)} key={i} className={props.theme === 'dark' ? 'lbtn' : 'dbtn'}>
