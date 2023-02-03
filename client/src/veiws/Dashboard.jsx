@@ -89,14 +89,14 @@ const Dashboard = (props) => {
                 user={user}
               />
 
-            <EditBudget
-              user={user}
-              budget={budget}
-              setBudget={setBudget}
-              index={index}
-              updateUser={updateUser}
-            // function ^
-            />
+              <EditBudget
+                user={user}
+                budget={budget}
+                setBudget={setBudget}
+                index={index}
+                updateUser={updateUser}
+              // function ^
+              />
 
             </div>
 
