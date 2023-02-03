@@ -6,7 +6,7 @@ const AllBudgets = (props) => {
   const arr = props.user.pages[props.index].categories
 
   const handleClick = (i) => {
-    if(props.budgetId === null) {
+    if(props.budgetId === null || i != props.budgetId) {
       console.log(i)
       props.setBudgetId(i)
     } else {
