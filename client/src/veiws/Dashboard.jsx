@@ -19,7 +19,7 @@ const Dashboard = (props) => {
   const [index, setIndex] = useState(0)
   const [month, setMonth] = useState("January")
   const [year, setYear] = useState(2023)
-  const [budget, setBudget] = useState(null)
+  const [budget, setBudget] = useState(0)
 
   useEffect(() => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
@@ -69,34 +69,41 @@ const Dashboard = (props) => {
             <IconButton onClick={createPage}><ControlPointIcon /></IconButton>
             {
               user.pages.length > 0 ?
-                <EditPages
-                  index={index}
-                  setIndex={setIndex}
-                  user={user}
-                  year={year}
-                  setYear={setYear}
-                  month={month}
-                  setMonth={setMonth}
-                  updateUser={updateUser}
-                // function ^
-                />
+                <>
+                  <EditPages
+                    index={index}
+                    setIndex={setIndex}
+                    user={user}
+                    year={year}
+                    setYear={setYear}
+                    month={month}
+                    setMonth={setMonth}
+                    updateUser={updateUser}
+                  // function ^
+                  />
+                  <div>
+                    <ShowBudget
+                      budget={budget}
+                      index={index}
+                      user={user}
+                      year={year}
+                      month={month}
+                    />
+                    <EditBudget
+                      user={user}
+                      budget={budget}
+                      setBudget={setBudget}
+                      index={index}
+                      updateUser={updateUser}
+                    // function ^
+                    />
+                  </div>
+                </>
                 : ""
             }
             <div>
-              <ShowBudget
-                budget={budget}
-                index={index}
-                user={user}
-              />
 
-              <EditBudget
-                user={user}
-                budget={budget}
-                setBudget={setBudget}
-                index={index}
-                updateUser={updateUser}
-              // function ^
-              />
+
 
             </div>
 
