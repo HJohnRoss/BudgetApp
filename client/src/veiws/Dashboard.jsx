@@ -220,7 +220,7 @@ const Dashboard = (props) => {
                   </div>
                 </Grid>
                 :
-                <h1>Click <ControlPointIcon /> to create a budget page!</h1>
+                <h1 className='text-center'>Click <ControlPointIcon /> to create a budget page!</h1>
             }
           </div> : ""
       }
