@@ -47,19 +47,19 @@ const About = (props) => {
         <p>If you wish to contact us, please fill out the form below and one of our
           team representatives will reach out within 48 hours.
         </p>
-        <div>
-          <p>
+        <div className="text-center">
+          <div className="form-control w-50">
             <label>Name: </label>
-            <input type="text" />
-          </p>
-          <p>
+            <input type="text"/>
+          </div>
+          <div className="form-control w-50">
             <label>E-mail: </label>
             <input type="text" />
-          </p>
-          <p className="me-3">
+          </div>
+          <div className="form-control w-50">
             <label>Message: </label>
             <textarea type="textarea" rows="4" cols="50" />
-          </p>
+          </div>
         </div>
       </div>
 
