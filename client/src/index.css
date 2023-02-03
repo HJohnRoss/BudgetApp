@@ -16,6 +16,8 @@ code {
   font-family: 'Helvetica';
 }
 
+/* === EVERYTHING HOMEPAGE === */
+
 #main-banner img {
   width: 100%;
 }
@@ -79,3 +81,25 @@ code {
   opacity: 0;
 }
 
+/* === EVERYTHING ABOUT US === */
+#about_banner img {
+  width: 100%;
+}
+
+#about h3 {
+  margin-top: 80px;
+}
+
+#about p {
+  margin-bottom: 80px;
+}
+
+#about-contact {
+  background-color: rgb(40, 126, 97);
+  padding-top: 60px;
+}
+
+#sm-icons img {
+  width: 40px;
+  height: 40px;
+}
