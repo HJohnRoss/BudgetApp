@@ -95,11 +95,20 @@ code {
 }
 
 #about-contact {
-  background-color: rgb(40, 126, 97);
-  padding-top: 60px;
+  background-color: rgb(58, 136, 195);
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+
+#about-contact-2 {
+  background-color: rgb(54, 193, 167);
+  padding-top: 20px;
+  padding-bottom: 50px;
 }
 
 #sm-icons img {
   width: 40px;
   height: 40px;
 }
+
+/* rgb(54, 193, 167) */

@@ -7,9 +7,21 @@ import sm_ln from '../images/sm-ln.png';
 import sm_p from '../images/sm-p.png';
 import sm_tumb from '../images/sm-tumb.png';
 import sm_tw from '../images/sm-tw.png';
+import FormControl from '@mui/material/FormControl';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { Link, useNavigate } from 'react-router-dom'
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import axios from 'axios'
+
 
 const About = (props) => {
-
 
   return (
     <div>
@@ -42,37 +54,93 @@ const About = (props) => {
         </p>
       </div>
 
-      <div id="about-contact" className="text-center text-white mt-4">
-        <h3>Contact Us</h3>
-        <p>If you wish to contact us, please fill out the form below and one of our
-          team representatives will reach out within 48 hours.
-        </p>
-        <div className="text-center">
-          <div className="form-control w-50">
-            <label>Name: </label>
-            <input type="text"/>
-          </div>
-          <div className="form-control w-50">
-            <label>E-mail: </label>
-            <input type="text" />
-          </div>
-          <div className="form-control w-50">
-            <label>Message: </label>
-            <textarea type="textarea" rows="4" cols="50" />
-          </div>
-        </div>
-      </div>
+      <div id={props.theme === 'dark' ? "about-contact" : "about-contact-2"}>
+        <Container component="main" maxWidth="sm" className="rounded" sx={props.theme === 'dark' ? { backgroundColor: "rgb(18,18,18)" } : { backgroundColor: "rgb(255,255,255)" }}>
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <MailOutlineIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Contact Us
+            </Typography>
+            <Typography component="p" variant="p" className="text-center mt-2">
+            If you wish to contact us, please fill out the form below and one of our team representatives will reach out within 48 hours.
+            </Typography>
+            {/* {
+            errors.map((err, i) => <p key={i}>{err}</p>)
+          } */}
+            <Box component="form" noValidate sx={{ mt: 3 }}>
+              <Grid container spacing={2}>
 
-      <div id="sm-icons" className="d-flex justify-content-center">
-        <div className="d-flex gap-4">
-          <img src={sm_fb} alt={sm_fb} />
-          <img src={sm_ig} alt={sm_ig} />
-          <img src={sm_ln} alt={sm_ln} />
-          <img src={sm_tw} alt={sm_tw} />
-          <img src={sm_p} alt={sm_p} />
-          <img src={sm_tumb} alt={sm_tumb} />
-        </div>
-      </div>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    name="name"
+                    label="Name"
+                    type="name"
+                    id="name"
+                    autoComplete="new-name"
+                  // onChange={e => setPassword(e.target.value)}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    autoComplete="given-name"
+                    name="email"
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    autoFocus
+                  // onChange={e => setEmail(e.target.value)}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    name="message"
+                    label="Message"
+                    type="message"
+                    id="message"
+                  // onChange={e => setConfirmedPassword(e.target.value)}
+                  />
+                </Grid>
+              </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Send
+              </Button>
+            </Box>
+          </Box>
+        </Container>
+
+
+        {/* SOCIAL MEDIA ICONS */}
+        < div id="sm-icons" className="d-flex justify-content-center mt-5" >
+          <div className="d-flex gap-4">
+            <img src={sm_fb} alt={sm_fb} />
+            <img src={sm_ig} alt={sm_ig} />
+            <img src={sm_ln} alt={sm_ln} />
+            <img src={sm_tw} alt={sm_tw} />
+            <img src={sm_p} alt={sm_p} />
+            <img src={sm_tumb} alt={sm_tumb} />
+          </div>
+        </div >
+
+      </div >
 
     </div>
   )
