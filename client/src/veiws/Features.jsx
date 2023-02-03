@@ -9,7 +9,7 @@ const Features = (props) => {
   return (
 
     <div>
-
+      <NavBar theme={props.theme} setTheme={props.setTheme} />
       <div>
         <div>
           <h3>Never miss a payment. Use our bills and subscription tracking tool</h3>
@@ -32,3 +32,5 @@ const Features = (props) => {
   )
 
 }
+
+export default Features

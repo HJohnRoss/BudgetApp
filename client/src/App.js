@@ -7,6 +7,7 @@ import Register from './veiws/Register';
 import Login from './veiws/Login';
 import Dashboard from './veiws/Dashboard';
 import About from './veiws/About'
+import Features from './veiws/Features'
 
 
 
@@ -72,6 +73,14 @@ function App() {
                 setTheme={setTheme}
               />}
             path="/about"
+          />
+
+          <Route
+            element={<Features
+              theme={theme}
+              setTheme={setTheme}
+            />}
+            path="/features"
           />
         </Routes>
       </ThemeProvider>
