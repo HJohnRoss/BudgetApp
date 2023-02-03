@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { Link } from 'react-router-dom'
+import logo from '../images/bg-logo.png'
 
 import SwitchMode from './SwitchMode';
 
@@ -76,7 +77,9 @@ const NavBar = (props) => {
             {list('left')}
           </Drawer>
         </React.Fragment>
-        <h3 style={{margin: "0 auto"}}>Budget Guard</h3>
+        <div style={{ margin: "0 auto" }}>
+          <img src={logo} alt="bg-logo" style={{width:100, height:100}} />
+        </div>
         <SwitchMode theme={props.theme} setTheme={props.setTheme} />
       </div>
     </>
