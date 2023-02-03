@@ -6,6 +6,7 @@ import feat_1 from '../images/feat-1.png';
 import feat_2 from '../images/feat-2.png';
 import feat_3 from '../images/feat-3.png';
 import feat_4 from '../images/feat-4.png';
+import feat_head from '../images/feat-head2.png';
 
 const Features = (props) => {
 
@@ -16,6 +17,10 @@ const Features = (props) => {
     <div>
 
       <NavBar theme={props.theme} setTheme={props.setTheme} />
+
+      <div id="feat_head">
+        <img src={feat_head} alt={"feat_head"} className="img-fluid" />
+      </div>
 
       <div id="header-open">
         <div className="d-flex container">
