@@ -106,9 +106,15 @@ code {
   padding-bottom: 50px;
 }
 
+#contact-icon-1 {
+  background-color: rgb(180, 124, 190);
+}
+
+#contact-icon-2 {
+  background-color: #FFDE59;
+}
+
 #sm-icons img {
   width: 40px;
   height: 40px;
 }
-
-/* rgb(54, 193, 167) */

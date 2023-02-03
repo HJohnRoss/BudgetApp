@@ -1,13 +1,13 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
-import about_banner from '../images/about-banner.png';
+import about_banner from '../images/about-banner-1.png';
+import about_banner_2 from '../images/about-banner-2.png';
 import sm_fb from '../images/sm-fb.png';
 import sm_ig from '../images/sm-ig.png';
 import sm_ln from '../images/sm-ln.png';
 import sm_p from '../images/sm-p.png';
 import sm_tumb from '../images/sm-tumb.png';
 import sm_tw from '../images/sm-tw.png';
-import FormControl from '@mui/material/FormControl';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -31,6 +31,10 @@ const About = (props) => {
 
       <div id="about_banner">
         <img src={about_banner} alt={"about_banner"} />
+      </div>
+
+      <div>
+        <img src={about_banner_2} alt={"about_banner_2"} />
       </div>
 
       <div id="about" className="container-sm text-center mt-4">
@@ -65,7 +69,7 @@ const About = (props) => {
               alignItems: 'center'
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <Avatar id={props.theme === 'dark' ? "contact-icon-1" : "contact-icon-2" } sx={{ m: 1 }}>
               <MailOutlineIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
@@ -99,7 +103,6 @@ const About = (props) => {
                     fullWidth
                     id="email"
                     label="Email"
-                    autoFocus
                   // onChange={e => setEmail(e.target.value)}
                   />
                 </Grid>
