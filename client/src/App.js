@@ -65,13 +65,13 @@ function App() {
               />}
             path="/dashboard/:id"
           />
-          <Route 
-          element={
-            <About 
-            />}
+          <Route
+            element={
+              <About
+                theme={theme}
+                setTheme={setTheme}
+              />}
             path="/about"
-            theme={theme}
-            setTheme={setTheme}
           />
         </Routes>
       </ThemeProvider>
