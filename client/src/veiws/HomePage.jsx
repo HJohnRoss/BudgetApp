@@ -29,7 +29,9 @@ const HomePage = (props) => {
       <h1 className='text-center'>Budget Guard</h1>
 
       {/* Main Landing Banner */}
-      <img src={main_banner} alt={"main_banner"} className="img-fluid" />
+      <div id="main-banner">
+        <img src={main_banner} alt={"main_banner"} className="img-fluid" />
+      </div>
 
       {/* Second Banner Promotion */}
       <div id="second-banner" className="mt-4">
