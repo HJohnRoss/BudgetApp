@@ -89,6 +89,7 @@ const EditPages = (props) => {
               id='standard-basic'
               label='Year'
               variant='standard'
+              type="number"
               value={props.year !== null ? props.year : props.user.pages[props.index].year}
               onChange={e => props.setYear(e.target.value)}
             />
