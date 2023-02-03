@@ -18,7 +18,6 @@ const EditPages = (props) => {
     let arr = props.user.pages
     arr[props.index].month = props.month
     arr[props.index].year = props.year
-    console.log(arr[props.index])
     axios.put(`http://localhost:8001/api/user/${id}`, {
       pages: arr
     }

@@ -33,7 +33,6 @@ const Dashboard = (props) => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
       .then(res => {
         setUser(res.data)
-        console.log(res.data)
         props.setLogged(true)
         if (res.data.pages[0]) {
           setBudget(res.data.pages[0].budget)
@@ -179,7 +178,8 @@ const Dashboard = (props) => {
                     }
                   </div>
                 </>
-                : ""
+                :
+                <h1>Click <ControlPointIcon /> to create a budget page!</h1>
             }
             <div>
 

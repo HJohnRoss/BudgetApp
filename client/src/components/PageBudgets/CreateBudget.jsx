@@ -25,7 +25,6 @@ const CreateBudget = (props) => {
       items: [],
       itemTotal: 0
     })
-    console.log(budgetName, budgetAmount)
     axios.put(`http://localhost:8001/api/user/${id}`, {
       pages: newPages
     }
