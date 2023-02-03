@@ -1,13 +1,34 @@
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import NativeSelect from '@mui/material/NativeSelect';
+
+import axios from 'axios'
+import React from 'react'
+import { useParams } from 'react-router-dom'
 
 const EditPages = (props) => {
 
+  const { id } = useParams()
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+    let arr = props.user.pages
+    arr[props.index].month = props.month
+    arr[props.index].year = props.year
+    console.log(arr[props.index])
+    axios.put(`http://localhost:8001/api/user/${id}`, {
+      pages: arr
+    }
+      , { withCredentials: true })
+      .then(res => {
+        console.log(res.data)
+        props.updateUser()
+      })
+      .catch(err => console.log(err))
+  }
 
   return (
     <Box component="form"
@@ -16,11 +37,11 @@ const EditPages = (props) => {
       }}
       noValidate
       autoComplete="off"
-      // onSubmit={updateUser}
-      >
+      onSubmit={onSubmit}
+    >
       <FormControl className='me-2' sx={{ minWidth: 200 }}>
-        <InputLabel id="demo-simple-select-label">Change Page</InputLabel>
-        <Select
+        <InputLabel variant="standard" htmlFor="uncontrolled-native">Change Budget Page</InputLabel>
+        <NativeSelect
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={props.index}
@@ -33,29 +54,54 @@ const EditPages = (props) => {
         >
           {
             props.user.pages.map((page, i) =>
-              <MenuItem key={i} value={i}>{page.month} | {page.year}</MenuItem>
+              <option key={i} value={i}>{page.month} {page.year}</option>
             )
           }
-        </Select>
+        </NativeSelect>
       </FormControl>
       {
         props.index !== null ?
           <>
+            <FormControl className='me-2' sx={{ minWidth: 200 }}>
+              <InputLabel variant="standard" htmlFor="uncontrolled-native">Month</InputLabel>
+              <NativeSelect
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                // defaultValue={props.month !== null ? props.month : props.user.pages[props.index].month}
+                label="Change Page"
+                value={props.month !== null ? props.month : props.user.pages[props.index].month}
+                onChange={e => {
+                  props.setMonth(e.target.value)
+                }}
+              >
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+              </NativeSelect>
+            </FormControl>
             <TextField
-              id="outlined-basic"
-              label="Month"
-              variant="outlined"
-              value={props.month !== null ? props.month : props.user.pages[props.index].month}
-              onChange={e => props.setMonth(e.target.value)}
-            />
-            <TextField
-              id='outlined-basic'
+              id='standard-basic'
               label='Year'
-              variant='outlined'
+              variant='standard'
               value={props.year !== null ? props.year : props.user.pages[props.index].year}
               onChange={e => props.setYear(e.target.value)}
             />
-            <Button value={props.index}>edit</Button>
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ mt: 1 }}
+            >
+              Update
+            </Button>
           </> : ""
       }
     </Box>

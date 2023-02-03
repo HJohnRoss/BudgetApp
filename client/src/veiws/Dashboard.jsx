@@ -4,20 +4,19 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import EditPages from '../components/EditPages';
 
 const Dashboard = (props) => {
-  const navigate = useNavigate()
 
   const { id } = useParams()
 
   const [user, setUser] = useState()
 
-  const [index, setIndex] = useState(null)
-  const [month, setMonth] = useState(null)
-  const [year, setYear] = useState(null)
+  const [index, setIndex] = useState(0)
+  const [month, setMonth] = useState("January")
+  const [year, setYear] = useState(2023)
 
   useEffect(() => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
@@ -43,7 +42,7 @@ const Dashboard = (props) => {
     console.log(user.pages)
     let arr = user.pages
     arr.push({
-      month: "Change this",
+      month: "January",
       year: 2023,
       budget: 0,
       categories: [],
@@ -67,15 +66,16 @@ const Dashboard = (props) => {
           <div>
             <IconButton onClick={createPage}><ControlPointIcon /></IconButton>
             {
-              user.pages ?
+              user.pages.length > 0 ?
                 <EditPages
-                 index={index}
-                 setIndex={setIndex}
-                 user={user}
-                 year={year}
-                 setYear={setYear}
-                 month={month}
-                 setMonth={setMonth}
+                  index={index}
+                  setIndex={setIndex}
+                  user={user}
+                  year={year}
+                  setYear={setYear}
+                  month={month}
+                  setMonth={setMonth}
+                  updateUser={updateUser}
                 />
                 : ""
             }
