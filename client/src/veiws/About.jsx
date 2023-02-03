@@ -39,7 +39,7 @@ const About = (props) => {
 
       <div id="about" className="container-sm text-center mt-4">
         <h3>Who We Are</h3>
-        <p>We are Budget Guard. A team of friendly and caring builders that have risen
+        <p>We are BudgetGuard. A team of friendly and caring builders that have risen
           from the depths of the Coding Dojo. With the mission of helping families, friends,
           and couples outsmarting money together, everyone can conquer their own finances and
           expenditures.  We believe that building better financial tools represent our greatest
@@ -47,7 +47,7 @@ const About = (props) => {
           by cultivating trust and transparency, delivering clarity and insight, enriching
           autonomy and wellness.</p>
         <h3>Our Story</h3>
-        <p>In 2023, John and Austin started Budget Guard to help friends and families develop better
+        <p>In 2023, John and Austin started BudgetGuard to help friends and families develop better
           financial literacy and habits. After seeing that most friends were using spreadsheets to
           manage their finances, Budget Guard was launched to disentangle the difficulties of people's
           financial troubles with the thought in mind of a friendly, easy-to-use user interface.
