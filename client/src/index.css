@@ -83,6 +83,10 @@ code {
 
 
 /* === EVERYTHING ABOUT FEATURES */
+/* FEAT HEAD */
+#feat_head img {
+  width: 100%;
+}
 
 /* FEAT 1 */
 #header-open {
