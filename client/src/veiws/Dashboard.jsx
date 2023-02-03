@@ -10,7 +10,7 @@ import EditPages from '../components/EditPages';
 import EditBudget from '../components/EditBudget'
 import ShowBudget from '../components/ShowBudget';
 import CreateBudget from '../components/PageBudgets/CreateBudget';
-// import AllBudgets from '../components/PageBudgets/AllBudgets';
+import AllBudgets from '../components/PageBudgets/AllBudgets';
 
 const Dashboard = (props) => {
 
@@ -21,13 +21,19 @@ const Dashboard = (props) => {
   const [index, setIndex] = useState(0)
   const [month, setMonth] = useState("January")
   const [year, setYear] = useState(2023)
-  const [budget, setBudget] = useState(null)
+  const [budget, setBudget] = useState("")
 
   useEffect(() => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
       .then(res => {
         setUser(res.data)
+        console.log(res.data)
         props.setLogged(true)
+        if(res.data.pages[0]){
+          setBudget(res.data.pages[0].budget)
+        } else {
+          setBudget(0)
+        }
       })
       .catch(err => console.log(err))
   }, [])
@@ -84,6 +90,7 @@ const Dashboard = (props) => {
                     setBudget={setBudget}
                   // function ^
                   />
+                  <hr />
                   <div>
                     <ShowBudget
                       budget={budget}
@@ -100,9 +107,19 @@ const Dashboard = (props) => {
                       updateUser={updateUser}
                     // function ^
                     />
+                    <hr />
                   </div>
                   <div>
                     <CreateBudget
+                      user={user}
+                      index={index}
+                      updateUser={updateUser}
+                    />
+                    <hr />
+                    <AllBudgets
+                      user={user}
+                      index={index}
+                      theme={props.theme}
                     />
                   </div>
                 </>
