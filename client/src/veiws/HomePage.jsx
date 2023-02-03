@@ -26,7 +26,7 @@ const HomePage = (props) => {
     <div>
       <NavBar theme={props.theme} setTheme={props.setTheme} />
 
-      <h1 className='text-center'>Budget Guard</h1>
+      <h1 className='text-center'>BudgetGuard</h1>
 
       {/* Main Landing Banner */}
       <div id="main-banner">

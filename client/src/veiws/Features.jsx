@@ -17,6 +17,7 @@ const Features = (props) => {
             from our app - never miss a single due date to avoid issues. No more manual work.
             Everything you need to reach financial wellness is wrapped out in our monthly bill organizer.
           </p>
+          <button class="button">Sign Up For BudgetGuard</button>
         </div>
         <img src={feat_1} alt={"feat_1"} />
       </div>
