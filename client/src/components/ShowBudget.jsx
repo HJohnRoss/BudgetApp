@@ -1,4 +1,4 @@
-import react from "react"
+import React from "react"
 
 const ShowBudget = (props) => {
   const page = props.user.pages[props.index]

@@ -11,6 +11,7 @@ import EditBudget from '../components/EditBudget'
 import ShowBudget from '../components/ShowBudget';
 import CreateBudget from '../components/PageBudgets/CreateBudget';
 import AllBudgets from '../components/PageBudgets/AllBudgets';
+import AddItem from '../components/PageBudgets/AddItem';
 
 const Dashboard = (props) => {
 
@@ -22,6 +23,8 @@ const Dashboard = (props) => {
   const [month, setMonth] = useState("January")
   const [year, setYear] = useState(2023)
   const [budget, setBudget] = useState("")
+
+  const [budgetId, setBudgetId] = useState(null)
 
   useEffect(() => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
@@ -120,7 +123,20 @@ const Dashboard = (props) => {
                       user={user}
                       index={index}
                       theme={props.theme}
+                      setBudgetId={setBudgetId}
+                      budgetId={budgetId}
                     />
+
+                    {
+                      budgetId !== null ?
+                    <AddItem
+                      user={user}
+                      index={index}
+                      budgetId={budgetId}
+                      setBudgetId={setBudgetId}
+                      updateUser={updateUser}
+                    /> : ""
+                    }
                   </div>
                 </>
                 : ""
