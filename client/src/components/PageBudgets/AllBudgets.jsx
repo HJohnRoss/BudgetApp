@@ -17,7 +17,7 @@ const AllBudgets = (props) => {
       <h1>Fast Approaching Budgets</h1>
       {
         arr.map((oneBudget, i) =>
-          <button onClick={() => handleClick(i)} key={i} className={props.theme === 'dark' ? 'lbtn' : 'dbtn container-fluid'}>
+          <button onClick={() => handleClick(i)} key={i} className={props.theme === 'dark' ? 'lbtn' : 'dbtn'}>
             <h4>{oneBudget.name}</h4>
             <h5>Amount Remaining in Budget: ${oneBudget.itemTotal} of ${oneBudget.amount}</h5>
           </button>
