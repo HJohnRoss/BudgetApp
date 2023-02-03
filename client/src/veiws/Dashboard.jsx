@@ -9,6 +9,8 @@ import { useParams } from 'react-router-dom'
 import EditPages from '../components/EditPages';
 import EditBudget from '../components/EditBudget'
 import ShowBudget from '../components/ShowBudget';
+import CreateBudget from '../components/PageBudgets/CreateBudget';
+// import AllBudgets from '../components/PageBudgets/AllBudgets';
 
 const Dashboard = (props) => {
 
@@ -19,7 +21,7 @@ const Dashboard = (props) => {
   const [index, setIndex] = useState(0)
   const [month, setMonth] = useState("January")
   const [year, setYear] = useState(2023)
-  const [budget, setBudget] = useState(0)
+  const [budget, setBudget] = useState(null)
 
   useEffect(() => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
@@ -79,6 +81,7 @@ const Dashboard = (props) => {
                     month={month}
                     setMonth={setMonth}
                     updateUser={updateUser}
+                    setBudget={setBudget}
                   // function ^
                   />
                   <div>
@@ -96,6 +99,10 @@ const Dashboard = (props) => {
                       index={index}
                       updateUser={updateUser}
                     // function ^
+                    />
+                  </div>
+                  <div>
+                    <CreateBudget
                     />
                   </div>
                 </>

@@ -48,6 +48,7 @@ const EditPages = (props) => {
             props.setMonth(props.user.pages[e.target.value].month)
             props.setYear(props.user.pages[e.target.value].year)
             props.setIndex(e.target.value)
+            props.setBudget(null)
           }}
         >
           {

@@ -1,7 +1,10 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-
+import Input from '@mui/material/Input';
+import InputAdornment from '@mui/material/InputAdornment';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
 
 import React from 'react'
 import axios from 'axios'
@@ -35,21 +38,21 @@ const EditBudget = (props) => {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
-        <TextField
+        <FormControl sx={{ m: 1 }} variant="standard">
+        <InputLabel htmlFor="standard-adornment-amount">Edit Budget</InputLabel>
+        <Input
           id="standard-number"
-          label="Edit Budget"
           type="number"
+          startAdornment={<InputAdornment position="start"><AttachMoneyIcon/></InputAdornment>}
           value={props.budget !== null ? props.budget : page.budget}
-          InputLabelProps={{
-            shrink: true,
-          }}
           variant="standard"
           onChange={e => props.setBudget(e.target.value)}
         />
+        </FormControl>
         <Button
           type="submit"
           variant="contained"
-          sx={{ mt: 1 }}
+          sx={{ mt: 2 }}
         >
           Set Budget
         </Button>
