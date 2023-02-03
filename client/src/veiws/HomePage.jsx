@@ -19,14 +19,16 @@ import Card from '@mui/material/Modal';
 import Container from '@mui/material/Container';
 import Modal from '@mui/material/Modal';
 import Stack from '@mui/material/Modal';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = (props) => {
+
+  const navigate = useNavigate()
 
   return (
     <div>
       <NavBar theme={props.theme} setTheme={props.setTheme} />
 
-      <h1 className='text-center'>BudgetGuard</h1>
 
       {/* Main Landing Banner */}
       <div id="main-banner">
@@ -42,7 +44,7 @@ const HomePage = (props) => {
         <div id="second-banner-img" className="d-flex justify-content-between gap-5 mt-5">
           <img src={cardleft} alt={"cardleft"} className="img-fluid mb-5" />
           <div>
-          <button class="btn">Get Started</button>
+          <button class="btn" onClick={() => navigate("/register")}>Get Started</button>
           </div>
           <img src={cardright} alt={"cardright"} className="img-fluid" />
         </div>
