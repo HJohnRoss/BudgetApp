@@ -6,6 +6,7 @@ import HomePage from './veiws/HomePage'
 import Register from './veiws/Register';
 import Login from './veiws/Login';
 import Dashboard from './veiws/Dashboard';
+import About from './veiws/About'
 
 
 
@@ -64,7 +65,14 @@ function App() {
               />}
             path="/dashboard/:id"
           />
-
+          <Route 
+          element={
+            <About 
+            />}
+            path="/about"
+            theme={theme}
+            setTheme={setTheme}
+          />
         </Routes>
       </ThemeProvider>
     </div>
