@@ -65,7 +65,7 @@ const NavBar = (props) => {
   );
   return (
     <>
-      <div className='d-flex justify-content-between sticky-sm-top' style={props.theme === 'light' ? { backgroundColor: "rgb(233,233,233)" } : { backgroundColor: "rgb(39,39,39)" }}>
+      <div className='d-flex justify-content-between sticky-top align-items-center' style={props.theme === 'light' ? { backgroundColor: "rgb(233,233,233)" } : { backgroundColor: "rgb(39,39,39)" }}>
         <React.Fragment>
           <IconButton onClick={toggleDrawer('left', true)}><MenuIcon /></IconButton>
           <Drawer
@@ -76,6 +76,7 @@ const NavBar = (props) => {
             {list('left')}
           </Drawer>
         </React.Fragment>
+        <h3 style={{margin: "0 auto"}}>Budget Guard</h3>
         <SwitchMode theme={props.theme} setTheme={props.setTheme} />
       </div>
     </>
