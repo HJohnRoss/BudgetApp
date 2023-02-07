@@ -47,9 +47,6 @@ const EditPages = (props) => {
           onChange={e => {
             props.setBudgetId(null)
             props.setShowTransactions(false)
-            props.setMonth(props.user.pages[e.target.value].month)
-            props.setBudget(props.user.pages[e.target.value].budget)
-            props.setYear(props.user.pages[e.target.value].year)
             props.setIndex(e.target.value)
           }}
         >

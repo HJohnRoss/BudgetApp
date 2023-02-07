@@ -18,8 +18,12 @@ import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 
-const Dashboard = (props) => {
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
 
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const Dashboard = (props) => {
   const { id } = useParams()
 
   const [user, setUser] = useState()
@@ -29,24 +33,50 @@ const Dashboard = (props) => {
   const [year, setYear] = useState(2023)
   const [budget, setBudget] = useState("")
 
+  
   const [budgetId, setBudgetId] = useState(null)
   const [showTransactions, setShowTransactions] = useState(false)
-
+  
   useEffect(() => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
-      .then(res => {
-        setUser(res.data)
-        props.setLogged(true)
-        if (res.data.pages[0]) {
-          setBudget(res.data.pages[0].budget)
-        } else {
-          setBudget(0)
+    .then(res => {
+      setUser(res.data)
+      props.setLogged(true)
+      if (res.data.pages[0]) {
+        setBudget(res.data.pages[0].budget)
+        let label = []
+        let items = []
+        for(let i = 0; i < res.data.pages[index].categories.length; i++){
+          label.push(res.data.pages[index].categories[i].name)
+          items.push(res.data.pages[index].categories[i].amount)
         }
+        chart.labels = label
+        chart.datasets.data = items
+        setChart(chart)
+      } else {
+        setBudget(0)
+      }
       })
       .catch(err => console.log(err))
-  }, [])
-
-  const updateUser = () => {
+    }, [index])
+    
+    const [chart, setChart] = useState({
+      labels: [],
+      datasets: {
+        label: `${month}, ${year} Budget`,
+        data: [],
+        backgroundColor: [
+          'rgba(255, 99, 132)',
+          'rgba(54, 162, 235)',
+          'rgba(255, 206, 86)',
+          'rgba(75, 192, 192)',
+          'rgba(153, 102, 255)',
+          'rgba(255, 159, 64)',
+        ],
+        hoverOffset: 4
+      }
+    })
+    const updateUser = () => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
       .then(res => {
         setUser(res.data)
@@ -74,6 +104,16 @@ const Dashboard = (props) => {
         updateUser()
       })
       .catch(err => console.log(err))
+  }
+
+  const data = {
+    labels: chart.labels,
+    datasets: [{
+      label: chart.datasets.label,
+      data: chart.datasets.data,
+      backgroundColor: chart.datasets.backgroundColor,
+      hoverOffset: chart.datasets.hoverOffset
+    }]
   }
 
   return (
@@ -148,6 +188,11 @@ const Dashboard = (props) => {
 
                   <div>
                     <Grid item xs={12}>
+                      <Card variant="outlined" className='rounded mb-4' sx={{ minWidth: 1, maxWidth: 500 }}>
+                        <CardContent>
+                          <Doughnut data={data} />
+                        </CardContent>
+                      </Card>
                       <Card variant="outlined" className='rounded' sx={{ minWidth: 1, maxWidth: 425 }}>
                         <CardContent>
                           <AllBudgets
