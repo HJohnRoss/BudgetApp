@@ -20,7 +20,7 @@ const AllBudgets = (props) => {
             <h4>{oneBudget.name}</h4>
             <h5>${oneBudget.itemTotal} of ${oneBudget.amount}</h5>
             <div className='progress' role='progressbar' aria-valuenow={0} aria-valuemin={0} aria-valuemax={props.budget}>
-              <div className='progress-bar' style={{ width: ((parseFloat(oneBudget.itemTotal) / parseFloat(oneBudget.amount)) * 100) + "%" }}></div>
+              <div className='progress-bar bg-danger' style={{ width: ((parseFloat(oneBudget.itemTotal) / parseFloat(oneBudget.amount)) * 100) + "%" }}></div>
             </div>
           </button>
         )

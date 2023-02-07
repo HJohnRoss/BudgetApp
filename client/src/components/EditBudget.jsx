@@ -45,7 +45,7 @@ const EditBudget = (props) => {
     <>
       <p className='ms-2'>${items} / ${page.budget}</p>
       <div className='progress ms-2' role='progressbar' aria-valuenow={0} aria-valuemin={0} aria-valuemax={props.budget}>
-        <div className='progress-bar' style={{ width: amount + "%" }}></div>
+        <div className='progress-bar bg-danger' style={{ width: amount + "%" }}></div>
       </div>
       <Box component="form"
         sx={{
