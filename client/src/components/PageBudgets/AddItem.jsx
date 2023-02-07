@@ -6,7 +6,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
@@ -14,35 +14,32 @@ const AddItem = (props) => {
   const arr = props.user.pages[props.index].categories[props.budgetId].items
   const { id } = useParams()
 
-  const [expense, setExpense] = useState("")
-  const [amnt, setAmnt] = useState("")
-
   const onSubmit = (e) => {
     e.preventDefault()
     const newPages = props.user.pages
     const userTransaction = props.user.transactions
     newPages[props.index].categories[props.budgetId].items.push({
-      expense: expense,
-      amount: amnt
+      expense: props.expense,
+      amount: props.amnt
     })
     newPages[props.index].transactions.push({
-      expense: expense,
-      amount: amnt
+      expense: props.expense,
+      amount: props.amnt
     })
     userTransaction.push({
-      expense: expense,
-      amount: amnt,
+      expense: props.expense,
+      amount: props.amnt,
       category: newPages[props.index].categories[props.budgetId].name
     })
-    newPages[props.index].categories[props.budgetId].itemTotal += parseFloat(amnt)
+    newPages[props.index].categories[props.budgetId].itemTotal += parseFloat(props.amnt)
     axios.put(`http://localhost:8001/api/user/${id}`, {
       transactions: userTransaction,
       pages: newPages
     }
       , { withCredentials: true })
       .then(res => {
-        setAmnt("")
-        setExpense("")
+        props.setAmnt("")
+        props.setExpense("")
         props.updateUser()
       })
       .catch(err => console.log(err))
@@ -69,8 +66,8 @@ const AddItem = (props) => {
             <InputLabel htmlFor="standard-adornment-amount">Expense</InputLabel>
             <Input
               id="standard-adornment-amount"
-              onChange={e => setExpense(e.target.value)}
-              value={expense}
+              onChange={e => props.setExpense(e.target.value)}
+              value={props.expense}
             />
           </FormControl>
           <FormControl sx={{ m: 1 }} variant="standard">
@@ -78,13 +75,13 @@ const AddItem = (props) => {
             <Input
               id="standard-number"
               type="number"
-              onChange={e => setAmnt(e.target.value)}
-              value={amnt}
+              onChange={e => props.setAmnt(e.target.value)}
+              value={props.amnt}
               startAdornment={<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>}
             />
           </FormControl>
           {
-            expense.length > 0 && amnt.length > 0 ?
+            props.expense.length > 0 && props.amnt.length > 0 ?
               <Button
                 type="submit"
                 variant="contained"

@@ -33,6 +33,9 @@ const Dashboard = (props) => {
   const [year, setYear] = useState(2023)
   const [budget, setBudget] = useState("")
 
+  const [expense, setExpense] = useState("")
+  const [amnt, setAmnt] = useState("")
+
   
   const [budgetId, setBudgetId] = useState(null)
   const [showTransactions, setShowTransactions] = useState(false)
@@ -47,8 +50,12 @@ const Dashboard = (props) => {
         let label = []
         let items = []
         for(let i = 0; i < res.data.pages[index].categories.length; i++){
+          let newTotal = 0
           label.push(res.data.pages[index].categories[i].name)
-          items.push(res.data.pages[index].categories[i].amount)
+          for(let j = 0; j < res.data.pages[index].categories[i].items.length; j++){
+            newTotal += parseFloat(res.data.pages[index].categories[i].items[j].amount)
+          }
+          items.push(newTotal)
         }
         chart.labels = label
         chart.datasets.data = items
@@ -63,7 +70,7 @@ const Dashboard = (props) => {
     const [chart, setChart] = useState({
       labels: [],
       datasets: {
-        label: `${month}, ${year} Budget`,
+        label: `spent`,
         data: [],
         backgroundColor: [
           'rgba(255, 99, 132)',
@@ -213,6 +220,10 @@ const Dashboard = (props) => {
                                   setBudgetId={setBudgetId}
                                   updateUser={updateUser}
                                   theme={props.theme}
+                                  expense={expense}
+                                  setExpense={setExpense}
+                                  amnt={amnt}
+                                  setAmnt={setAmnt}
                                 />
                               </>
                               : ""
