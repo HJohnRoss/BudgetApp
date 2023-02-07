@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './module.allbudgets.css'
 
 const AllBudgets = (props) => {
-  const arr = props.user.pages[props.index].categories
+  const page = props.user.pages[props.index]
 
   const handleClick = (i) => {
-    if(props.budgetId === null || i != props.budgetId) {
+    if (props.budgetId === null || i != props.budgetId) {
       props.setBudgetId(i)
     } else {
       props.setBudgetId(null)
@@ -15,10 +15,13 @@ const AllBudgets = (props) => {
     <>
       <h1 className='text-center'>Fast Approaching Budgets</h1>
       {
-        arr.map((oneBudget, i) =>
-          <button onClick={() => handleClick(i)} key={i} className={props.theme === 'dark' ? 'lbtn' : 'dbtn'}>
+        page.categories.map((oneBudget, i) =>
+          <button onClick={() => handleClick(i)} key={i} className={props.theme === 'dark' ? 'lbtn container-fluid' : 'dbtn container-fluid'}>
             <h4>{oneBudget.name}</h4>
-            <h5>Amount Remaining in Budget: ${oneBudget.itemTotal} of ${oneBudget.amount}</h5>
+            <h5>${oneBudget.itemTotal} of ${oneBudget.amount}</h5>
+            <div className='progress' role='progressbar' aria-valuenow={0} aria-valuemin={0} aria-valuemax={props.budget}>
+              <div className='progress-bar' style={{ width: ((parseFloat(oneBudget.itemTotal) / parseFloat(oneBudget.amount)) * 100) + "%" }}></div>
+            </div>
           </button>
         )
       }
