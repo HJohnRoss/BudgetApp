@@ -13,17 +13,20 @@ import { useParams } from 'react-router-dom'
 const EditBudget = (props) => {
   const page = props.user.pages[props.index]
   const [amount, setAmount] = useState(0)
+  const [items, setItems] = useState(0)
+  
+  const { id } = useParams()
+  
   useEffect(() => {
     let temp = 0
-    for(let i = 0; i < props.user.transactions.length; i++) {
-      temp += parseInt(props.user.transactions[i].amount)
+    for (let i = 0; i < page.transactions.length; i++) {
+      temp += parseFloat(page.transactions[i].amount)
     }
-    if(page.budget > 0) {
-      setAmount((temp / parseInt(page.budget)) * 100)
+    if (page.budget > 0) {
+      setItems(temp)
+      setAmount((temp / parseFloat(page.budget)) * 100)
     }
   })
-
-  const { id } = useParams()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -40,7 +43,8 @@ const EditBudget = (props) => {
 
   return (
     <>
-      <div className='progress' role='progressbar' aria-valuenow={0} aria-valuemin={0} aria-valuemax={props.budget}>
+      <p className='ms-2'>${items} / ${page.budget}</p>
+      <div className='progress ms-2' role='progressbar' aria-valuenow={0} aria-valuemin={0} aria-valuemax={props.budget}>
         <div className='progress-bar' style={{ width: amount + "%" }}></div>
       </div>
       <Box component="form"
