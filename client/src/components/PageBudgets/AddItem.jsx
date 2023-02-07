@@ -20,19 +20,23 @@ const AddItem = (props) => {
   const onSubmit = (e) => {
     e.preventDefault()
     const newPages = props.user.pages
-    const transaction = props.user.transactions
+    const userTransaction = props.user.transactions
     newPages[props.index].categories[props.budgetId].items.push({
       expense: expense,
       amount: amnt
     })
-    transaction.push({
+    newPages[props.index].transactions.push({
+      expense: expense,
+      amount: amnt
+    })
+    userTransaction.push({
       expense: expense,
       amount: amnt,
       category: newPages[props.index].categories[props.budgetId].name
     })
     newPages[props.index].categories[props.budgetId].itemTotal += parseFloat(amnt)
     axios.put(`http://localhost:8001/api/user/${id}`, {
-      transactions: transaction,
+      transactions: userTransaction,
       pages: newPages
     }
       , { withCredentials: true })
