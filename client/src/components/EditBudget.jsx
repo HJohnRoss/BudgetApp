@@ -26,7 +26,7 @@ const EditBudget = (props) => {
       setItems(temp)
       setAmount((temp / parseFloat(page.budget)) * 100)
     }
-  })
+  }, [props.index])
 
   const handleSubmit = (e) => {
     e.preventDefault()

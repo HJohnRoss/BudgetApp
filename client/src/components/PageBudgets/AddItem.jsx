@@ -41,6 +41,7 @@ const AddItem = (props) => {
         props.setAmnt("")
         props.setExpense("")
         props.updateUser()
+        props.setUpdateChart(true)
       })
       .catch(err => console.log(err))
   }

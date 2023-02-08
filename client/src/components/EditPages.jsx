@@ -48,6 +48,7 @@ const EditPages = (props) => {
             props.setBudgetId(null)
             props.setShowTransactions(false)
             props.setIndex(e.target.value)
+            props.setBudget(props.user.pages[e.target.value].budget)
           }}
         >
           {

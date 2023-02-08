@@ -35,55 +35,62 @@ const Dashboard = (props) => {
 
   const [expense, setExpense] = useState("")
   const [amnt, setAmnt] = useState("")
+  const [updateChart, setUpdateChart] = useState(false)
 
-  
+
   const [budgetId, setBudgetId] = useState(null)
   const [showTransactions, setShowTransactions] = useState(false)
-  
+
   useEffect(() => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
-    .then(res => {
-      setUser(res.data)
-      props.setLogged(true)
-      if (res.data.pages[0]) {
-        setBudget(res.data.pages[0].budget)
-        let label = []
-        let items = []
-        for(let i = 0; i < res.data.pages[index].categories.length; i++){
-          let newTotal = 0
-          label.push(res.data.pages[index].categories[i].name)
-          for(let j = 0; j < res.data.pages[index].categories[i].items.length; j++){
-            newTotal += parseFloat(res.data.pages[index].categories[i].items[j].amount)
+      .then(res => {
+        setUser(res.data)
+        props.setLogged(true)
+        if (res.data.pages[0]) {
+          if (!res.data.pages[0].budget) {
+            setBudget(res.data.pages[0].budget)
           }
-          items.push(newTotal)
+          let label = []
+          let items = []
+          for (let i = 0; i < res.data.pages[index].categories.length; i++) {
+            let newTotal = 0
+            label.push(res.data.pages[index].categories[i].name)
+            for (let j = 0; j < res.data.pages[index].categories[i].items.length; j++) {
+              newTotal += parseFloat(res.data.pages[index].categories[i].items[j].amount)
+            }
+            items.push(newTotal)
+          }
+          chart.labels = label
+          chart.datasets.data = items
+          setChart(chart)
+          setUpdateChart(false)
+          console.log(updateChart)
+        } else {
+          setBudget(0)
         }
-        chart.labels = label
-        chart.datasets.data = items
-        setChart(chart)
-      } else {
-        setBudget(0)
-      }
       })
       .catch(err => console.log(err))
-    }, [index])
-    
-    const [chart, setChart] = useState({
-      labels: [],
-      datasets: {
-        label: `spent`,
-        data: [],
-        backgroundColor: [
-          'rgba(255, 99, 132)',
-          'rgba(54, 162, 235)',
-          'rgba(255, 206, 86)',
-          'rgba(75, 192, 192)',
-          'rgba(153, 102, 255)',
-          'rgba(255, 159, 64)',
-        ],
-        hoverOffset: 4
-      }
-    })
-    const updateUser = () => {
+  }, [index, updateChart])
+
+  const [chart, setChart] = useState({
+    labels: null,
+    datasets: {
+      label: `spent`,
+      data: [],
+      backgroundColor: [
+        'rgba(255, 99, 132)',
+        'rgba(54, 162, 235)',
+        'rgba(255, 206, 86)',
+        'rgba(75, 192, 192)',
+        'rgba(153, 102, 255)',
+        'rgba(255, 159, 64)',
+        'rgba(19,63,92)',
+
+      ],
+      hoverOffset: 4,
+    }
+  })
+  const updateUser = () => {
     axios.get(`http://localhost:8001/api/user/${id}`, { withCredentials: true })
       .then(res => {
         setUser(res.data)
@@ -195,11 +202,14 @@ const Dashboard = (props) => {
 
                   <div>
                     <Grid item xs={12}>
-                      <Card variant="outlined" className='rounded mb-4' sx={{ minWidth: 1, maxWidth: 500 }}>
-                        <CardContent>
-                          <Doughnut data={data} />
-                        </CardContent>
-                      </Card>
+                      {
+                        user.pages[index].transactions.length > 0 ?
+                          <Card variant="outlined" className='rounded mb-4' sx={{ minWidth: 1, maxWidth: 500 }}>
+                            <CardContent>
+                              <Doughnut data={data} />
+                            </CardContent>
+                          </Card> : ""
+                      }
                       <Card variant="outlined" className='rounded' sx={{ minWidth: 1, maxWidth: 425 }}>
                         <CardContent>
                           <AllBudgets
@@ -224,6 +234,7 @@ const Dashboard = (props) => {
                                   setExpense={setExpense}
                                   amnt={amnt}
                                   setAmnt={setAmnt}
+                                  setUpdateChart={setUpdateChart}
                                 />
                               </>
                               : ""
