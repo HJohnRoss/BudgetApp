@@ -67,7 +67,7 @@ const EditBudget = (props) => {
           />
         </FormControl>
         {
-          props.budget.length > 0 ?
+          props.budget.length > 0 && props.budget !== page.budget ?
             <Button
               type="submit"
               variant="contained"

@@ -37,6 +37,9 @@ const Dashboard = (props) => {
   const [amnt, setAmnt] = useState("")
   const [updateChart, setUpdateChart] = useState(false)
 
+  const [budgetName, setBudgetName] = useState(null)
+  const [budgetAmount, setBudgetAmount] = useState(null)
+
 
   const [budgetId, setBudgetId] = useState(null)
   const [showTransactions, setShowTransactions] = useState(false)
@@ -64,7 +67,9 @@ const Dashboard = (props) => {
           chart.datasets.data = items
           setChart(chart)
           setUpdateChart(false)
-          console.log(updateChart)
+          
+          setBudgetName(null)
+          setBudgetAmount(null)
         } else {
           setBudget(0)
         }
@@ -194,6 +199,11 @@ const Dashboard = (props) => {
                             user={user}
                             index={index}
                             updateUser={updateUser}
+                            budgetName={budgetName}
+                            setBudgetName={setBudgetName}
+                            budgetAmount={budgetAmount}
+                            setBudgetAmount={setBudgetAmount}
+
                           />
                         </CardContent>
                       </Card>

@@ -13,15 +13,12 @@ import axios from 'axios'
 const CreateBudget = (props) => {
   const { id } = useParams()
 
-  const [budgetName, setBudgetName] = useState(null)
-  const [budgetAmount, setBudgetAmount] = useState(null)
-
   const onSubmit = (e) => {
     e.preventDefault()
     let newPages = props.user.pages
     newPages[props.index].categories.push({
-      name: budgetName,
-      amount: budgetAmount,
+      name: props.budgetName,
+      amount: props.budgetAmount,
       items: [],
       itemTotal: 0
     })
@@ -30,8 +27,8 @@ const CreateBudget = (props) => {
     }
       , { withCredentials: true })
       .then(res => {
-        setBudgetName(null)
-        setBudgetAmount(null)
+        props.setBudgetName(null)
+        props.setBudgetAmount(null)
         props.updateUser()
       })
       .catch(err => console.log(err))
@@ -50,20 +47,22 @@ const CreateBudget = (props) => {
           <InputLabel htmlFor="standard-adornment-amount">Budget Name</InputLabel>
           <Input
             id="standard-adornment-amount"
-            onChange={e => setBudgetName(e.target.value)}
-          />
+            onChange={e => props.setBudgetName(e.target.value)}
+            value={props.budgetName ? props.budgetName : ""}
+            />
         </FormControl>
         <FormControl sx={{ m: 1 }} variant="standard">
           <InputLabel htmlFor="standard-adornment-amount">Budget Amount</InputLabel>
           <Input
             id="standard-number"
             type="number"
-            onChange={e => setBudgetAmount(e.target.value)}
+            onChange={e => props.setBudgetAmount(e.target.value)}
             startAdornment={<InputAdornment position="start"><AttachMoneyIcon /></InputAdornment>}
+            value={props.budgetAmount ? props.budgetAmount : ""}
           />
         </FormControl>
         {
-          budgetName !== null && budgetAmount !== null ?
+          props.budgetName !== null && props.budgetAmount !== null ?
             <Button
               type="submit"
               variant="contained"
