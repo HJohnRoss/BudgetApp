@@ -186,6 +186,7 @@ const Dashboard = (props) => {
                             setBudget={setBudget}
                             index={index}
                             updateUser={updateUser}
+                            updateChart={updateChart}
                           // function ^
                           />
                         </CardContent>
