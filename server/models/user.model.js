@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     validate: {
       validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
       message: "Please enter a valid email"
-  }
+    }
   },
   phone: {
     type: String
