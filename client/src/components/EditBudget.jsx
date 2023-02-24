@@ -14,19 +14,21 @@ const EditBudget = (props) => {
   const page = props.user.pages[props.index]
   const [amount, setAmount] = useState(0)
   const [items, setItems] = useState(0)
-  
+
   const { id } = useParams()
-  
+
   useEffect(() => {
     let temp = 0
     for (let i = 0; i < page.transactions.length; i++) {
       temp += parseFloat(page.transactions[i].amount)
     }
-    if (page.budget > 0) {
-      setItems(temp)
+    setItems(temp)
+    if(temp != 0) {
       setAmount((temp / parseFloat(page.budget)) * 100)
+    } else {
+      setAmount(0)
     }
-  }, [props.index, props.updateChart])
+  }, [props.index, props.updateChart, page])
 
   const handleSubmit = (e) => {
     e.preventDefault()
