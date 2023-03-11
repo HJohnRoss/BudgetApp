@@ -67,7 +67,7 @@ const Dashboard = (props) => {
           chart.datasets.data = items
           setChart(chart)
           setUpdateChart(false)
-          
+
           setBudgetName(null)
           setBudgetAmount(null)
         } else {
@@ -159,7 +159,13 @@ const Dashboard = (props) => {
 
   return (
     <>
-      <NavBar theme={props.theme} setTheme={props.setTheme} />
+      <NavBar
+      theme={props.theme}
+      setTheme={props.setTheme}
+      logged={props.logged}
+      setLogged={props.setLogged}
+      setUser={setUser}
+      />
       {
         user ?
           <div>

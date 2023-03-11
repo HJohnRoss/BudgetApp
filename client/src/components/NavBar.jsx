@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
@@ -16,11 +16,25 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import { Link } from 'react-router-dom'
 import logolm from '../images/bg-logo-lm.png'
 import logodm from '../images/bg-logo-dm.png'
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useParams, useNavigate } from "react-router-dom"
+import axios from 'axios';
 
 import SwitchMode from './SwitchMode';
 
 
 const NavBar = (props) => {
+  const [buttons, setButtons] = useState()
+  const { id } = useParams()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (props.logged === true) {
+      setButtons(['Dashboard', 'Logout'])
+    } else {
+      setButtons(['Home', 'Features', 'About', 'Login', 'Register'])
+    }
+  }, [props.logged])
 
   const [state, setState] = React.useState({
     left: false,
@@ -33,6 +47,17 @@ const NavBar = (props) => {
     setState({ ...state, [anchor]: open });
   };
 
+  const handleLogout = (e) => {
+    e.preventDefault()
+    axios.get("http://localhost:8001/api/logout", { withCredentials: true })
+      .then(res => {
+        props.setUser(null)
+        props.setLogged(false)
+        navigate("/")
+      })
+      .catch(err => console.log(err))
+  }
+
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -41,29 +66,49 @@ const NavBar = (props) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Home', 'Features', 'About', 'Login', 'Register'].map((text, index) => (
-          <Link
-            to={index === 0 ? `/` : `/${text.toLowerCase()}`}
-            key={text}
-            className="text-decoration-none"
-            style={props.theme === 'dark' ? { color: "rgb(233,233,233)" } : { color: "rgb(39,39,39)" }}
-          >
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index === 0 ? <HomeIcon /> : ""}
-                  {index === 1 ? <DisplaySettingsIcon /> : ""}
-                  {index === 2 ? <InfoIcon /> : ""}
-                  {index === 3 ? <LoginIcon /> : ""}
-                  {index === 4 ? <PersonAddAlt1Icon /> : ""}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          </Link>
-        ))}
+        {
+          buttons ?
+            buttons.map((text, index) => (
+              <Link
+                to={
+                  index === 0 && buttons.length > 2 ? `/` :
+                    index === 0 && buttons.length === 2 ? `/${text.toLowerCase()}/${id}` :
+                      index === 1 && buttons.length === 2 ? ``
+                        : `/${text.toLowerCase()}`
+                }
+                key={text}
+                className="text-decoration-none"
+                style={props.theme === 'dark' ? { color: "rgb(233,233,233)" } : { color: "rgb(39,39,39)" }}
+              >
+
+                <ListItem key={text} disablePadding>
+                  {
+                    index === 1 && buttons.length === 2 ?
+                      <ListItemButton onClick={handleLogout}>
+                        <ListItemIcon>
+                          {<LogoutIcon />}
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                      </ListItemButton>
+                      :
+                      <ListItemButton>
+                        <ListItemIcon>
+                          {index === 0 ? <HomeIcon /> : ""}
+                          {index === 1 ? <DisplaySettingsIcon /> : ""}
+                          {index === 2 ? <InfoIcon /> : ""}
+                          {index === 3 ? <LoginIcon /> : ""}
+                          {index === 4 ? <PersonAddAlt1Icon /> : ""}
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                      </ListItemButton>
+                  }
+                </ListItem>
+              </Link>
+            )) : ""
+        }
+
       </List>
-    </Box>
+    </Box >
   );
   return (
     <>
@@ -85,6 +130,7 @@ const NavBar = (props) => {
               <img src={logodm} alt="bg-logo" style={{ width: 100, height: 100, marginLeft: '70px' }} />
           }
         </div>
+        <h1>{props.logged}</h1>
         <SwitchMode theme={props.theme} setTheme={props.setTheme} />
       </div>
     </>

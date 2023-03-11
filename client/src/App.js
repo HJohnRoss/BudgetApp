@@ -14,7 +14,7 @@ import Features from './veiws/Features'
 function App() {
   const [theme, setTheme] = useState('dark')
 
-  const [logged, setLogged] = useState(null)
+  const [logged, setLogged] = useState(false)
 
   const currTheme = createTheme({
     palette: {
@@ -32,6 +32,7 @@ function App() {
                 theme={theme}
                 setTheme={setTheme}
                 logged={logged}
+                setLogged={setLogged}
               />}
             path="/"
           />
