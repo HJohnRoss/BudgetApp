@@ -28,8 +28,8 @@
 ## Future Updates
 
 * Allow users to delete boards that they do not want anymore
-* Implimant Sass instead of Material UI and Bootstrap
+* Implement Sass instead of Material UI and Bootstrap
 * Make the front end of the dashboard more visually pleasing for the user
-* Impliment Plaid api so the user has an option to link theyre bank account for accessable information
+* Implement Plaid api so the user has an option to link theyre bank account for accessable information
 
 <p align="right">(<a href="#top">back to top</a>)</p>
